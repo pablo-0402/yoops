@@ -2,7 +2,7 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>my world</title>
+    <title>Para Sofi</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
       rel="stylesheet"
@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./style.css" />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Caveat:wght@500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Caveat:wght@500&display=swap"
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
     <style>
@@ -24,7 +24,7 @@
         --azul: #8DB0DA;
         --serif: "Cormorant Garamond", Georgia, serif;
         --mano: "Caveat", "Comic Sans MS", cursive;
-        --sans: Arial, Helvetica, sans-serif;
+        --sans: "Cormorant Garamond", Georgia, serif;
       }
       html, body { height: 100%; }
       body { overflow: hidden; }
@@ -47,7 +47,8 @@
         border-radius: 999px;
         padding: 12px 26px;
         font-family: var(--sans);
-        font-size: 13px;
+        font-weight: 700;
+        font-size: 17px;
         letter-spacing: 1.5px;
         cursor: pointer;
       }
@@ -64,13 +65,14 @@
       #sLock h1 {
         font-style: italic;
         font-weight: 500;
-        font-size: 44px;
+        font-size: 46px;
         margin: 54px 0 6px;
       }
       #sLock .ramo { width: 190px; height: 190px; margin: 6px auto 0; display: block; }
       .pin-label {
         font-family: var(--sans);
-        font-size: 11px;
+        font-weight: 600;
+        font-size: 15px;
         letter-spacing: 3px;
         margin-top: 10px;
         opacity: 0.9;
@@ -104,12 +106,13 @@
         background: rgba(255, 255, 255, 0.22);
         color: #fff;
         font-family: var(--sans);
-        font-size: 24px;
+        font-weight: 600;
+        font-size: 31px;
         cursor: pointer;
       }
       .teclado button:active { background: rgba(255, 255, 255, 0.45); }
       .teclado .vacio { visibility: hidden; }
-      .teclado .borrar { font-size: 16px; background: transparent; }
+      .teclado .borrar { font-size: 19px; font-style: italic; background: transparent; }
 
       /* ---------- 2. Sobre ---------- */
       #sEnvelope {
@@ -142,33 +145,34 @@
       #sEnvelope.open .tapa { transform: rotateX(180deg); z-index: 0; }
       .sobre .sello {
         position: absolute;
-        top: 50%;
+        top: 45%;
         left: 50%;
-        width: 40px;
-        height: 40px;
-        margin: -20px 0 0 -20px;
-        border-radius: 50%;
-        background: radial-gradient(circle at 35% 35%, #B23A48, var(--vino));
+        width: 64px;
+        height: 64px;
+        margin: -32px 0 0 -32px;
         z-index: 3;
-        transition: opacity 0.4s;
+        filter: drop-shadow(0 3px 3px rgba(80, 10, 20, 0.35));
+        transition: opacity 0.4s, transform 0.4s;
       }
-      #sEnvelope.open .sello { opacity: 0; }
+      #sEnvelope.open .sello { opacity: 0; transform: scale(1.2); }
       .sobre .nombres {
         position: absolute;
-        bottom: 14px;
+        bottom: 10px;
         left: 0;
         right: 0;
         text-align: center;
         color: var(--cafe);
         font-style: italic;
-        font-size: 19px;
-        line-height: 1.3;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 1.25;
       }
       .tocar {
         margin-top: 30px;
         color: var(--cafe);
         font-family: var(--sans);
-        font-size: 12px;
+        font-weight: 700;
+        font-size: 16px;
         letter-spacing: 3px;
         animation: latido 1.6s ease-in-out infinite;
       }
@@ -176,7 +180,13 @@
 
       /* ---------- 3. Pastel ---------- */
       #sCake { background: #333; }
-      #sCake .candle-count-display { margin-top: 110px; }
+      #sCake .candle-count-display {
+        margin-top: 110px;
+        font-family: var(--serif);
+        font-weight: 600;
+        font-size: 22px;
+      }
+      #shareBtn, #shareMsg { font-family: var(--serif) !important; font-weight: 600; font-size: 18px !important; }
       #shareBox {
         position: absolute;
         bottom: 34px;
@@ -215,84 +225,22 @@
       .mix { max-width: 560px; margin: 0 auto; }
       .mix .para {
         font-family: var(--sans);
-        font-size: 10px;
+        font-weight: 700;
+        font-size: 14px;
         letter-spacing: 2.5px;
         color: var(--vino);
       }
       .mix h2 { font-weight: 500; font-size: 42px; margin: 4px 0 18px; }
       .cassette {
-        position: relative;
-        width: 300px;
+        width: 340px;
         max-width: 100%;
-        height: 190px;
-        margin: 0 auto 24px;
-        border-radius: 14px;
-        background: #6E9B78;
-        box-shadow: 0 14px 28px rgba(35, 64, 47, 0.3), inset 0 -6px 0 rgba(0, 0, 0, 0.12);
+        margin: 0 auto 26px;
+        filter: drop-shadow(0 14px 18px rgba(35, 64, 47, 0.3));
       }
-      .cassette .etiqueta {
-        position: absolute;
-        top: 16px;
-        left: 18px;
-        right: 18px;
-        height: 104px;
-        border-radius: 8px;
-        background:
-          repeating-linear-gradient(45deg, rgba(255,255,255,0.35) 0 10px, transparent 10px 20px),
-          #CFE3C9;
-      }
-      .cassette .titulo-cinta {
-        position: absolute;
-        top: 8px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: var(--crema);
-        padding: 2px 16px;
-        border-radius: 10px;
-        font-style: italic;
-        font-size: 15px;
-        white-space: nowrap;
-      }
-      .cassette .ventana {
-        position: absolute;
-        top: 42px;
-        left: 50%;
-        width: 170px;
-        height: 46px;
-        margin-left: -85px;
-        border-radius: 23px;
-        background: #3E5E48;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 9px;
-        box-sizing: border-box;
-      }
-      .cassette .rueda {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        background: repeating-conic-gradient(#EFE6D4 0 30deg, #CFC4AE 30deg 60deg);
-        border: 3px solid #EFE6D4;
-      }
-      .cassette.sonando .rueda { animation: girar 2.4s linear infinite; }
+      .cassette svg { display: block; width: 100%; height: auto; }
+      .cassette .rueda > g { transform-box: fill-box; transform-origin: center; }
+      .cassette.sonando .rueda > g { animation: girar 2.4s linear infinite; }
       @keyframes girar { to { transform: rotate(360deg); } }
-      .cassette .base {
-        position: absolute;
-        bottom: 0;
-        left: 50px;
-        right: 50px;
-        height: 46px;
-        background: #5D8968;
-        clip-path: polygon(10% 0, 90% 0, 100% 100%, 0 100%);
-      }
-      .cassette .lazo {
-        position: absolute;
-        top: 82px;
-        right: 34px;
-        width: 40px;
-        height: 26px;
-      }
       .pistas { border-top: 1px solid rgba(35, 64, 47, 0.2); margin-bottom: 20px; }
       .pista {
         display: flex;
@@ -304,8 +252,8 @@
       }
       .pista .num { font-style: italic; font-size: 18px; width: 22px; }
       .pista .txt { flex: 1; font-family: var(--sans); }
-      .pista .t { font-size: 14px; color: #222; }
-      .pista .a { font-size: 11px; opacity: 0.6; }
+      .pista .t { font-size: 19px; font-weight: 600; color: #222; }
+      .pista .a { font-size: 14px; opacity: 0.65; }
       .pista .play {
         width: 34px;
         height: 34px;
@@ -323,7 +271,7 @@
         box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
         transform: rotate(-1deg);
       }
-      .nota .lbl { font-family: var(--sans); font-size: 10px; letter-spacing: 2px; margin-bottom: 6px; }
+      .nota .lbl { font-family: var(--sans); font-weight: 700; font-size: 14px; letter-spacing: 2px; margin-bottom: 6px; }
       .nota p { margin: 0; font-style: italic; font-size: 21px; line-height: 1.35; }
       .tira {
         display: flex;
@@ -383,6 +331,33 @@
         transform: rotate(-4deg);
       }
 
+      /* ---------- Cortina de flores ---------- */
+      #cortina { position: fixed; inset: 0; z-index: 55; pointer-events: none; overflow: hidden; }
+      #cortina.cerrada { pointer-events: auto; }
+      #cortina .lado {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 52%;
+        background-color: #F7E3E1;
+        background-size: 150px 150px;
+        transition: transform 0.85s cubic-bezier(0.7, 0, 0.3, 1);
+        box-shadow: 0 0 30px rgba(120, 60, 70, 0.25);
+      }
+      #cortina .izq { left: 0; transform: translateX(calc(-100% - 70px)); }
+      #cortina .der { right: 0; transform: translateX(calc(100% + 70px)); }
+      #cortina.cerrada .izq, #cortina.cerrada .der { transform: translateX(0); }
+      #cortina .borde {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 76px;
+        background-size: 76px 120px;
+        background-repeat: repeat-y;
+      }
+      #cortina .izq .borde { right: -38px; }
+      #cortina .der .borde { left: -38px; background-position: 0 60px; }
+
       /* ---------- Foto grande ---------- */
       #lightbox {
         position: fixed;
@@ -419,8 +394,8 @@
         max-width: calc(100vw - 130px);
       }
       #player .info { display: flex; flex-direction: column; min-width: 0; }
-      #player .label { font-size: 9px; letter-spacing: 1.5px; opacity: 0.8; }
-      #player .titulo { font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      #player .label { font-size: 12px; font-weight: 700; letter-spacing: 1.5px; opacity: 0.8; }
+      #player .titulo { font-size: 16px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
       #playBtn {
         flex: none;
         width: 32px;
@@ -445,7 +420,7 @@
         left: 0;
         width: 1px;
         height: 1px;
-        opacity: 0.01;
+        opacity: 0.001;
         pointer-events: none;
         overflow: hidden;
       }
@@ -522,7 +497,27 @@
     <section class="scene" id="sEnvelope">
       <div class="sobre">
         <div class="tapa"></div>
-        <div class="sello"></div>
+        <svg class="sello" viewBox="0 0 100 100" aria-hidden="true">
+          <defs>
+            <radialGradient id="cera" cx="36%" cy="30%" r="80%">
+              <stop offset="0" stop-color="#D2505F" />
+              <stop offset="0.5" stop-color="#A2202F" />
+              <stop offset="1" stop-color="#6A0E1A" />
+            </radialGradient>
+            <radialGradient id="ceraIn" cx="62%" cy="68%" r="70%">
+              <stop offset="0" stop-color="#B83545" />
+              <stop offset="1" stop-color="#7C1423" />
+            </radialGradient>
+          </defs>
+          <path d="M50 3 C61 2 69 8 78 11 C89 15 97 26 95 38 C99 48 98 60 93 69 C89 80 80 88 69 93 C59 98 46 99 36 95 C24 92 12 85 7 73 C2 62 1 50 5 39 C8 27 15 15 27 9 C34 5 42 4 50 3 Z" fill="url(#cera)" />
+          <path d="M84 76 C88 82 90 88 86 90 C82 91 81 85 82 79 Z" fill="#8E1726" />
+          <circle cx="50" cy="50" r="31" fill="url(#ceraIn)" />
+          <circle cx="50" cy="50" r="31" fill="none" stroke="#E07784" stroke-opacity="0.55" stroke-width="1.6" />
+          <circle cx="50" cy="50" r="26" fill="none" stroke="#5E0C17" stroke-opacity="0.5" stroke-width="1" stroke-dasharray="1.5 2.5" />
+          <path d="M50 64 C38 55 33 49 33 43 C33 37 38 34 42 34 C46 34 48 36 50 39 C52 36 54 34 58 34 C62 34 67 37 67 43 C67 49 62 55 50 64 Z" fill="#6E1020" />
+          <path d="M50 62 C39 54 35 49 35 43.5 C35 38.5 39 36 42.5 36 C46 36 48 38 50 41 C52 38 54 36 57.5 36 C61 36 65 38.5 65 43.5 C65 49 61 54 50 62 Z" fill="none" stroke="#E58A95" stroke-opacity="0.6" stroke-width="1.2" />
+          <ellipse cx="34" cy="24" rx="12" ry="6" transform="rotate(-30 34 24)" fill="#fff" opacity="0.18" />
+        </svg>
         <div class="nombres">
           <div id="sobrePara"></div>
           <div id="sobreDe"></div>
@@ -565,14 +560,87 @@
         <div class="para" id="mixPara"></div>
         <h2 id="mixTitle"></h2>
         <div class="cassette" id="cassette">
-          <div class="etiqueta"></div>
-          <div class="titulo-cinta" id="mixTitle2"></div>
-          <div class="ventana"><div class="rueda"></div><div class="rueda"></div></div>
-          <svg class="lazo" viewBox="0 0 40 26" aria-hidden="true">
-            <path d="M20 13 L4 3 Q0 13 4 23 Z M20 13 L36 3 Q40 13 36 23 Z" fill="#F2A7B5" />
-            <circle cx="20" cy="13" r="4" fill="#E0788D" />
+          <svg viewBox="0 0 320 205" aria-hidden="true">
+            <defs>
+              <linearGradient id="cuerpo" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#83AE8C" />
+                <stop offset="1" stop-color="#5E8B69" />
+              </linearGradient>
+              <radialGradient id="tornillo" cx="35%" cy="35%" r="70%">
+                <stop offset="0" stop-color="#F2EEE4" />
+                <stop offset="1" stop-color="#9C9584" />
+              </radialGradient>
+              <radialGradient id="cinta" cx="50%" cy="50%" r="50%">
+                <stop offset="0.55" stop-color="#4A3426" />
+                <stop offset="1" stop-color="#2B1D15" />
+              </radialGradient>
+              <pattern id="cuadros" width="12" height="12" patternUnits="userSpaceOnUse">
+                <rect width="12" height="12" fill="#DCEBD6" />
+                <rect width="6" height="6" fill="#C3DCBC" />
+                <rect x="6" y="6" width="6" height="6" fill="#C3DCBC" />
+              </pattern>
+              <linearGradient id="vidrio" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#fff" stop-opacity="0.28" />
+                <stop offset="0.45" stop-color="#fff" stop-opacity="0.04" />
+                <stop offset="1" stop-color="#fff" stop-opacity="0.12" />
+              </linearGradient>
+            </defs>
+            <!-- cuerpo -->
+            <rect x="1" y="1" width="318" height="203" rx="14" fill="url(#cuerpo)" />
+            <rect x="5" y="5" width="310" height="195" rx="11" fill="none" stroke="#fff" stroke-opacity="0.18" stroke-width="1.2" />
+            <path d="M3 30 h3 M3 38 h3 M3 46 h3 M3 54 h3 M314 30 h3 M314 38 h3 M314 46 h3 M314 54 h3" stroke="#3E6448" stroke-opacity="0.5" stroke-width="1.2" />
+            <!-- etiqueta -->
+            <rect x="24" y="20" width="272" height="118" rx="7" fill="#F6F1E3" />
+            <rect x="24" y="20" width="272" height="24" rx="7" fill="url(#cuadros)" />
+            <rect x="24" y="37" width="272" height="7" fill="url(#cuadros)" />
+            <rect x="24" y="44" width="272" height="2.5" fill="#B23A48" opacity="0.75" />
+            <circle cx="42" cy="61" r="9" fill="#B23A48" />
+            <text x="42" y="65.5" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-weight="700" font-size="13" fill="#F6F1E3">A</text>
+            <text id="mixTitle2" x="60" y="68" font-family="Caveat, cursive" font-size="22" fill="#23402F"></text>
+            <text x="284" y="66" text-anchor="end" font-family="Cormorant Garamond, Georgia, serif" font-weight="700" font-size="9" letter-spacing="1" fill="#7A6E57">C-60</text>
+            <path d="M58 74 H284" stroke="#C9BFA8" stroke-width="0.8" />
+            <!-- ventana -->
+            <rect x="72" y="78" width="176" height="36" rx="18" fill="#2F4A39" />
+            <circle cx="108" cy="95" r="15" fill="url(#cinta)"/>
+            <circle cx="108" cy="95" r="15" fill="none" stroke="#000" stroke-opacity="0.25" stroke-width="0.6" stroke-dasharray="0.6 1.4"/>
+            <g class="rueda" transform="translate(108 95)"><g>
+              <circle r="10.5" fill="#F4EEDF" stroke="#A89F8A" stroke-width="0.8"/>
+              <rect x="-1.6" y="-9" width="3.2" height="4" rx="0.8" fill="#BDB49F" transform="rotate(0)"/><rect x="-1.6" y="-9" width="3.2" height="4" rx="0.8" fill="#BDB49F" transform="rotate(60)"/><rect x="-1.6" y="-9" width="3.2" height="4" rx="0.8" fill="#BDB49F" transform="rotate(120)"/><rect x="-1.6" y="-9" width="3.2" height="4" rx="0.8" fill="#BDB49F" transform="rotate(180)"/><rect x="-1.6" y="-9" width="3.2" height="4" rx="0.8" fill="#BDB49F" transform="rotate(240)"/><rect x="-1.6" y="-9" width="3.2" height="4" rx="0.8" fill="#BDB49F" transform="rotate(300)"/>
+              <circle r="3.4" fill="#2A2A2A"/>
+            </g></g>
+            <circle cx="212" cy="95" r="11.5" fill="url(#cinta)"/>
+            <circle cx="212" cy="95" r="11.5" fill="none" stroke="#000" stroke-opacity="0.25" stroke-width="0.6" stroke-dasharray="0.6 1.4"/>
+            <g class="rueda" transform="translate(212 95)"><g>
+              <circle r="10.5" fill="#F4EEDF" stroke="#A89F8A" stroke-width="0.8"/>
+              <rect x="-1.6" y="-9" width="3.2" height="4" rx="0.8" fill="#BDB49F" transform="rotate(0)"/><rect x="-1.6" y="-9" width="3.2" height="4" rx="0.8" fill="#BDB49F" transform="rotate(60)"/><rect x="-1.6" y="-9" width="3.2" height="4" rx="0.8" fill="#BDB49F" transform="rotate(120)"/><rect x="-1.6" y="-9" width="3.2" height="4" rx="0.8" fill="#BDB49F" transform="rotate(180)"/><rect x="-1.6" y="-9" width="3.2" height="4" rx="0.8" fill="#BDB49F" transform="rotate(240)"/><rect x="-1.6" y="-9" width="3.2" height="4" rx="0.8" fill="#BDB49F" transform="rotate(300)"/>
+              <circle r="3.4" fill="#2A2A2A"/>
+            </g></g>
+            <path d="M108 110 Q160 116 212 106.5" stroke="#3A2A1F" stroke-width="2" fill="none" />
+            <rect x="140" y="84" width="40" height="22" rx="3" fill="#41604B" stroke="#24382B" stroke-width="0.8" />
+            <path d="M146 95 h28 M146 90 v10 M174 90 v10" stroke="#9FBFA6" stroke-width="0.7" opacity="0.7" />
+            <rect x="72" y="78" width="176" height="36" rx="18" fill="url(#vidrio)" />
+            <rect x="72.5" y="78.5" width="175" height="35" rx="17.5" fill="none" stroke="#000" stroke-opacity="0.35" />
+            <!-- lazo -->
+            <g transform="translate(262 116)">
+              <path d="M0 0 L-17 -10 Q-21 0 -17 10 Z M0 0 L17 -10 Q21 0 17 10 Z" fill="#F2A7B5" stroke="#D97C8F" stroke-width="0.8" />
+              <path d="M-2 2 L-9 16 M2 2 L8 16" stroke="#F2A7B5" stroke-width="3.5" stroke-linecap="round" />
+              <circle r="4" fill="#E0788D" />
+            </g>
+            <!-- flor -->
+            <g transform="translate(46 118)">
+              <circle cx="0" cy="-5" r="4.5" fill="#fff" /><circle cx="4.8" cy="-1.5" r="4.5" fill="#fff" />
+              <circle cx="3" cy="4" r="4.5" fill="#fff" /><circle cx="-3" cy="4" r="4.5" fill="#fff" />
+              <circle cx="-4.8" cy="-1.5" r="4.5" fill="#fff" /><circle r="3" fill="#F3CF5A" />
+            </g>
+            <!-- base -->
+            <path d="M62 204 L78 152 H242 L258 204 Z" fill="#557F60" stroke="#456C50" stroke-width="1" />
+            <path d="M80 158 H240" stroke="#fff" stroke-opacity="0.15" />
+            <circle cx="110" cy="182" r="7" fill="#2F4A39" /><circle cx="210" cy="182" r="7" fill="#2F4A39" />
+            <rect x="136" y="171" width="9" height="9" rx="1.5" fill="#2F4A39" />
+            <rect x="175" y="171" width="9" height="9" rx="1.5" fill="#2F4A39" />
+            <circle cx="88" cy="194" r="2.5" fill="#2F4A39" /><circle cx="232" cy="194" r="2.5" fill="#2F4A39" />
+            <g transform="translate(14 14)"><circle r="5.2" fill="url(#tornillo)" stroke="#6F6A5E" stroke-width="0.8"/><path d="M-3 -1 L3 1 M-1 3 L1 -3" stroke="#6F6A5E" stroke-width="1.1" stroke-linecap="round"/></g><g transform="translate(306 14)"><circle r="5.2" fill="url(#tornillo)" stroke="#6F6A5E" stroke-width="0.8"/><path d="M-3 -1 L3 1 M-1 3 L1 -3" stroke="#6F6A5E" stroke-width="1.1" stroke-linecap="round"/></g><g transform="translate(14 191)"><circle r="5.2" fill="url(#tornillo)" stroke="#6F6A5E" stroke-width="0.8"/><path d="M-3 -1 L3 1 M-1 3 L1 -3" stroke="#6F6A5E" stroke-width="1.1" stroke-linecap="round"/></g><g transform="translate(306 191)"><circle r="5.2" fill="url(#tornillo)" stroke="#6F6A5E" stroke-width="0.8"/><path d="M-3 -1 L3 1 M-1 3 L1 -3" stroke="#6F6A5E" stroke-width="1.1" stroke-linecap="round"/></g><g transform="translate(160 190)"><circle r="5.2" fill="url(#tornillo)" stroke="#6F6A5E" stroke-width="0.8"/><path d="M-3 -1 L3 1 M-1 3 L1 -3" stroke="#6F6A5E" stroke-width="1.1" stroke-linecap="round"/></g>
           </svg>
-          <div class="base"></div>
         </div>
         <div class="pistas" id="pistas"></div>
         <div class="nota">
@@ -590,6 +658,8 @@
       <div class="collage" id="collage"></div>
     </section>
 
+    <div id="cortina"><div class="lado izq"><div class="borde"></div></div><div class="lado der"><div class="borde"></div></div></div>
+
     <div id="lightbox" class="hidden"><img id="lightboxImg" alt="" /></div>
 
     <script>
@@ -597,9 +667,9 @@
          CONFIGURACIÓN
          ===================================================== */
       const CONFIG = {
-        para: "sofi",
-        de: "pablo",
-        tituloCandado: "my world",
+        para: "Sofi",
+        de: "Pablo",
+        tituloCandado: "La Cumpleañera",
         codigo: "0811",
         tituloVideo: "¡Feliz cumpleaños!",
 
@@ -695,6 +765,49 @@
         else player.playVideo();
       });
 
+      // ---------- Cortina de flores ----------
+      function flor(x, y, r, petalo, centro) {
+        let g = "";
+        for (let i = 0; i < 5; i++) {
+          const a = (i * 72 - 90) * Math.PI / 180;
+          g += `<circle cx="${(x + Math.cos(a) * r * 0.62).toFixed(1)}" cy="${(y + Math.sin(a) * r * 0.62).toFixed(1)}" r="${(r * 0.5).toFixed(1)}" fill="${petalo}"/>`;
+        }
+        return g + `<circle cx="${x}" cy="${y}" r="${(r * 0.3).toFixed(1)}" fill="${centro}"/>`;
+      }
+      function hoja(x, y, ang, tam) {
+        return `<ellipse cx="${x}" cy="${y}" rx="${tam}" ry="${tam * 0.42}" fill="#8DB596" transform="rotate(${ang} ${x} ${y})"/>`;
+      }
+      function svgUrl(w, h, cuerpo) {
+        const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">${cuerpo}</svg>`;
+        return 'url("data:image/svg+xml;utf8,' + encodeURIComponent(svg) + '")';
+      }
+      const P = { rosa: ["#F2A7B5", "#D9667E"], durazno: ["#F6C2A6", "#E48F6E"], amarillo: ["#F7D774", "#E3A93B"],
+                  lila: ["#C9B6E8", "#9C82CF"], blanco: ["#FFFFFF", "#F3CF5A"], rojo: ["#E86A7E", "#B9435A"] };
+      const patron = svgUrl(150, 150,
+        hoja(40, 48, -30, 13) + hoja(112, 34, 35, 11) + hoja(84, 108, 20, 14) + hoja(20, 128, -50, 10) + hoja(140, 120, 60, 10) +
+        flor(28, 32, 20, ...P.rosa) + flor(104, 22, 16, ...P.blanco) + flor(76, 82, 24, ...P.durazno) +
+        flor(18, 112, 15, ...P.lila) + flor(128, 98, 17, ...P.amarillo) + flor(140, 56, 10, ...P.rojo) + flor(56, 140, 12, ...P.blanco));
+      const borde = svgUrl(76, 120,
+        hoja(20, 50, -40, 16) + hoja(58, 100, 40, 15) +
+        flor(38, 28, 30, ...P.rosa) + flor(36, 88, 28, ...P.durazno));
+      document.querySelectorAll("#cortina .lado").forEach((l) => (l.style.backgroundImage = patron));
+      document.querySelectorAll("#cortina .borde").forEach((b) => (b.style.backgroundImage = borde));
+
+      let enTransicion = false;
+      function transition(id) {
+        if (enTransicion) return;
+        enTransicion = true;
+        const c = document.getElementById("cortina");
+        c.classList.add("cerrada");
+        setTimeout(() => {
+          go(id);
+          setTimeout(() => {
+            c.classList.remove("cerrada");
+            setTimeout(() => (enTransicion = false), 850);
+          }, 350);
+        }, 900);
+      }
+
       // ---------- Escenas ----------
       function go(id) {
         document.querySelectorAll(".scene").forEach((s) => s.classList.remove("active"));
@@ -704,7 +817,6 @@
         document.getElementById("player").classList.toggle("claro", id === "sEnvelope" || id === "sMixtape");
         if (id === "sVideo") document.getElementById("video").play().catch(() => {});
         else document.getElementById("video").pause();
-        if (id === "sScrap") playSong(CONFIG.cancionScrapbook, 0);
         // Música más baja mientras sopla, para que el micrófono no la confunda con un soplido
         if (playerReady) player.setVolume(id === "sCake" ? 25 : 100);
         document.getElementById("ytHolder").classList.toggle("encima", id === "sEnvelope" && playerReady);
@@ -716,10 +828,14 @@
       document.getElementById("backBtn").addEventListener("click", () => {
         const id = document.querySelector(".scene.active").id;
         if (BACK[id] === "sCake") relightCandles();
-        if (BACK[id]) go(BACK[id]);
+        if (BACK[id]) transition(BACK[id]);
       });
       document.querySelectorAll("[data-next]").forEach((b) =>
-        b.addEventListener("click", () => go(b.dataset.next))
+        b.addEventListener("click", () => {
+          // la canción se pide en el mismo toque para que el teléfono la deje sonar
+          if (b.dataset.next === "sScrap") playSong(CONFIG.cancionScrapbook, 0);
+          transition(b.dataset.next);
+        })
       );
 
       // ---------- Textos y fotos ----------
@@ -743,8 +859,8 @@
       });
 
       document.getElementById("lockTitle").textContent = CONFIG.tituloCandado;
-      document.getElementById("sobrePara").textContent = "Para " + CONFIG.para;
-      document.getElementById("sobreDe").textContent = "De " + CONFIG.de;
+      document.getElementById("sobrePara").textContent = "Para: " + CONFIG.para;
+      document.getElementById("sobreDe").textContent = "De: " + CONFIG.de;
       document.getElementById("videoTitle").textContent = CONFIG.tituloVideo;
       document.getElementById("mixPara").textContent =
         ("PARA " + CONFIG.para + " · DE " + CONFIG.de).toUpperCase();
@@ -789,7 +905,7 @@
         candleCountDisplay.textContent = active;
         if (isRecipient && candles.length > 0 && active === 0 && !finished) {
           finished = true;
-          setTimeout(() => go("sVideo"), 1500);
+          setTimeout(() => transition("sVideo"), 1500);
         }
       }
 
@@ -889,7 +1005,7 @@
             if (pin.length === 4) {
               if (pin === CONFIG.codigo) {
                 startMic();
-                setTimeout(() => go("sEnvelope"), 400);
+                setTimeout(() => transition("sEnvelope"), 250);
               } else {
                 dots.classList.add("mal");
                 setTimeout(() => {
@@ -916,7 +1032,7 @@
               playSong(CONFIG.cancion, CONFIG.inicio);
             }
           }, 1500);
-          setTimeout(() => go("sCake"), 1200);
+          setTimeout(() => transition("sCake"), 1000);
         };
         env.addEventListener("click", () => {
           if (playerReady) playSong(CONFIG.cancion, CONFIG.inicio);
