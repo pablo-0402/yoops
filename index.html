@@ -1,155 +1,885 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Candle Blow</title>
+    <title>my world</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
     />
     <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Caveat:wght@500&display=swap"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+    <style>
+      :root {
+        --crema: #FBF3E4;
+        --papel: #F0E4D0;
+        --cafe: #6A4B18;
+        --vino: #7A1F2B;
+        --verde: #23402F;
+        --azul: #8DB0DA;
+        --serif: "Cormorant Garamond", Georgia, serif;
+        --mano: "Caveat", "Comic Sans MS", cursive;
+        --sans: Arial, Helvetica, sans-serif;
+      }
+      html, body { height: 100%; }
+      body { overflow: hidden; }
+      .hidden { display: none !important; }
+
+      /* ---------- Escenas ---------- */
+      .scene {
+        position: fixed;
+        inset: 0;
+        overflow-y: auto;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 1s ease;
+        -webkit-overflow-scrolling: touch;
+      }
+      .scene.active { opacity: 1; pointer-events: auto; z-index: 5; }
+      .btn {
+        display: inline-block;
+        border: none;
+        border-radius: 999px;
+        padding: 12px 26px;
+        font-family: var(--sans);
+        font-size: 13px;
+        letter-spacing: 1.5px;
+        cursor: pointer;
+      }
+      .btn-vino { background: var(--vino); color: var(--crema); }
+      .btn-crema { background: var(--papel); color: var(--cafe); }
+
+      /* ---------- 1. Candado ---------- */
+      #sLock {
+        background: var(--azul);
+        color: #fff;
+        text-align: center;
+        font-family: var(--serif);
+      }
+      #sLock h1 {
+        font-style: italic;
+        font-weight: 500;
+        font-size: 44px;
+        margin: 54px 0 6px;
+      }
+      #sLock .ramo { width: 190px; height: 190px; margin: 6px auto 0; display: block; }
+      .pin-label {
+        font-family: var(--sans);
+        font-size: 11px;
+        letter-spacing: 3px;
+        margin-top: 10px;
+        opacity: 0.9;
+      }
+      .pin-dots { display: flex; justify-content: center; gap: 14px; margin: 16px 0 20px; }
+      .pin-dots span {
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+        border: 1.5px solid #fff;
+        transition: background 0.15s;
+      }
+      .pin-dots span.on { background: #fff; }
+      .pin-dots.mal { animation: temblor 0.4s; }
+      @keyframes temblor {
+        25% { transform: translateX(-10px); }
+        75% { transform: translateX(10px); }
+      }
+      .teclado {
+        display: grid;
+        grid-template-columns: repeat(3, 66px);
+        gap: 14px;
+        justify-content: center;
+        padding-bottom: 40px;
+      }
+      .teclado button {
+        width: 66px;
+        height: 66px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(255, 255, 255, 0.22);
+        color: #fff;
+        font-family: var(--sans);
+        font-size: 24px;
+        cursor: pointer;
+      }
+      .teclado button:active { background: rgba(255, 255, 255, 0.45); }
+      .teclado .vacio { visibility: hidden; }
+      .teclado .borrar { font-size: 16px; background: transparent; }
+
+      /* ---------- 2. Sobre ---------- */
+      #sEnvelope {
+        background: #E9DDC7;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-family: var(--serif);
+      }
+      .sobre {
+        position: relative;
+        width: 300px;
+        height: 196px;
+        background: #F3E9D6;
+        border-radius: 4px;
+        box-shadow: 0 20px 40px rgba(90, 60, 20, 0.28);
+      }
+      .sobre .tapa {
+        position: absolute;
+        inset: 0 0 auto 0;
+        height: 62%;
+        background: #EADBC0;
+        clip-path: polygon(0 0, 100% 0, 50% 100%);
+        transform-origin: top;
+        transition: transform 0.9s ease;
+        z-index: 2;
+      }
+      #sEnvelope.open .tapa { transform: rotateX(180deg); z-index: 0; }
+      .sobre .sello {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 40px;
+        height: 40px;
+        margin: -20px 0 0 -20px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 35% 35%, #B23A48, var(--vino));
+        z-index: 3;
+        transition: opacity 0.4s;
+      }
+      #sEnvelope.open .sello { opacity: 0; }
+      .sobre .nombres {
+        position: absolute;
+        bottom: 14px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        color: var(--cafe);
+        font-style: italic;
+        font-size: 19px;
+        line-height: 1.3;
+      }
+      .tocar {
+        margin-top: 30px;
+        color: var(--cafe);
+        font-family: var(--sans);
+        font-size: 12px;
+        letter-spacing: 3px;
+        animation: latido 1.6s ease-in-out infinite;
+      }
+      @keyframes latido { 50% { opacity: 0.3; } }
+
+      /* ---------- 3. Pastel ---------- */
+      #sCake { background: #333; }
+      #sCake .candle-count-display { margin-top: 110px; }
+      #shareBox {
+        position: absolute;
+        bottom: 34px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-family: var(--sans);
+      }
+
+      /* ---------- 4. Video ---------- */
+      #sVideo {
+        background: #2B2B2B;
+        text-align: center;
+        padding: 84px 16px 50px;
+        box-sizing: border-box;
+        font-family: var(--serif);
+      }
+      #sVideo h1 { color: var(--papel); font-weight: 500; font-size: 38px; margin: 0 0 20px; }
+      #sVideo video {
+        width: 100%;
+        max-width: 640px;
+        border-radius: 10px;
+        background: #000;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+      }
+      #sVideo .btn { margin-top: 26px; }
+
+      /* ---------- 5. Mixtape ---------- */
+      #sMixtape {
+        background: var(--crema);
+        color: var(--verde);
+        font-family: var(--serif);
+        padding: 76px 22px 50px;
+        box-sizing: border-box;
+      }
+      .mix { max-width: 560px; margin: 0 auto; }
+      .mix .para {
+        font-family: var(--sans);
+        font-size: 10px;
+        letter-spacing: 2.5px;
+        color: var(--vino);
+      }
+      .mix h2 { font-weight: 500; font-size: 42px; margin: 4px 0 18px; }
+      .cassette {
+        position: relative;
+        width: 300px;
+        max-width: 100%;
+        height: 190px;
+        margin: 0 auto 24px;
+        border-radius: 14px;
+        background: #6E9B78;
+        box-shadow: 0 14px 28px rgba(35, 64, 47, 0.3), inset 0 -6px 0 rgba(0, 0, 0, 0.12);
+      }
+      .cassette .etiqueta {
+        position: absolute;
+        top: 16px;
+        left: 18px;
+        right: 18px;
+        height: 104px;
+        border-radius: 8px;
+        background:
+          repeating-linear-gradient(45deg, rgba(255,255,255,0.35) 0 10px, transparent 10px 20px),
+          #CFE3C9;
+      }
+      .cassette .titulo-cinta {
+        position: absolute;
+        top: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--crema);
+        padding: 2px 16px;
+        border-radius: 10px;
+        font-style: italic;
+        font-size: 15px;
+        white-space: nowrap;
+      }
+      .cassette .ventana {
+        position: absolute;
+        top: 42px;
+        left: 50%;
+        width: 170px;
+        height: 46px;
+        margin-left: -85px;
+        border-radius: 23px;
+        background: #3E5E48;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 9px;
+        box-sizing: border-box;
+      }
+      .cassette .rueda {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: repeating-conic-gradient(#EFE6D4 0 30deg, #CFC4AE 30deg 60deg);
+        border: 3px solid #EFE6D4;
+      }
+      .cassette.sonando .rueda { animation: girar 2.4s linear infinite; }
+      @keyframes girar { to { transform: rotate(360deg); } }
+      .cassette .base {
+        position: absolute;
+        bottom: 0;
+        left: 50px;
+        right: 50px;
+        height: 46px;
+        background: #5D8968;
+        clip-path: polygon(10% 0, 90% 0, 100% 100%, 0 100%);
+      }
+      .cassette .lazo {
+        position: absolute;
+        top: 82px;
+        right: 34px;
+        width: 40px;
+        height: 26px;
+      }
+      .pistas { border-top: 1px solid rgba(35, 64, 47, 0.2); margin-bottom: 20px; }
+      .pista {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 12px 2px;
+        border-bottom: 1px solid rgba(35, 64, 47, 0.2);
+        cursor: pointer;
+      }
+      .pista .num { font-style: italic; font-size: 18px; width: 22px; }
+      .pista .txt { flex: 1; font-family: var(--sans); }
+      .pista .t { font-size: 14px; color: #222; }
+      .pista .a { font-size: 11px; opacity: 0.6; }
+      .pista .play {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: var(--vino);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+      }
+      .nota {
+        background: #FBE8B7;
+        padding: 18px 20px;
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+        transform: rotate(-1deg);
+      }
+      .nota .lbl { font-family: var(--sans); font-size: 10px; letter-spacing: 2px; margin-bottom: 6px; }
+      .nota p { margin: 0; font-style: italic; font-size: 21px; line-height: 1.35; }
+      .tira {
+        display: flex;
+        gap: 12px;
+        overflow-x: auto;
+        padding: 24px 4px 14px;
+      }
+      .polaroid {
+        flex: none;
+        background: #fff;
+        padding: 8px 8px 26px;
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+        cursor: zoom-in;
+      }
+      .polaroid img { display: block; width: 130px; height: 150px; object-fit: cover; }
+      .tira .polaroid:nth-child(odd) { transform: rotate(-3deg); }
+      .tira .polaroid:nth-child(even) { transform: rotate(2.5deg); }
+      .mix .seguir { text-align: center; margin-top: 18px; }
+
+      /* ---------- 6. Scrapbook ---------- */
+      #sScrap {
+        background:
+          radial-gradient(circle at 20% 10%, rgba(255,255,255,0.06), transparent 40%),
+          var(--verde);
+        padding: 76px 14px 60px;
+        box-sizing: border-box;
+        text-align: center;
+      }
+      #sScrap h2 {
+        font-family: var(--mano);
+        font-weight: 500;
+        color: var(--papel);
+        font-size: 34px;
+        margin: 0 auto 26px;
+        max-width: 520px;
+        line-height: 1.1;
+      }
+      .collage {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 18px 14px;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .collage .polaroid img { width: 140px; height: 165px; }
+      .collage .polaroid { position: relative; }
+      .collage .polaroid::before {
+        content: "";
+        position: absolute;
+        top: -9px;
+        left: 50%;
+        width: 54px;
+        height: 18px;
+        margin-left: -27px;
+        background: rgba(240, 228, 208, 0.75);
+        transform: rotate(-4deg);
+      }
+
+      /* ---------- Foto grande ---------- */
+      #lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 60;
+        background: rgba(0, 0, 0, 0.85);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: zoom-out;
+      }
+      #lightbox img { max-width: 92vw; max-height: 86vh; border: 8px solid #fff; }
+
+      /* ---------- Reproductor (vidrio) ---------- */
+      #player {
+        position: fixed;
+        top: 14px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 40;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 6px 6px 16px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.2);
+        -webkit-backdrop-filter: blur(14px);
+        backdrop-filter: blur(14px);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+        color: #fff;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+        font-family: var(--sans);
+        max-width: 78vw;
+      }
+      #player .info { display: flex; flex-direction: column; min-width: 0; }
+      #player .label { font-size: 9px; letter-spacing: 1.5px; opacity: 0.8; }
+      #player .titulo { font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      #playBtn {
+        flex: none;
+        width: 32px;
+        height: 32px;
+        border: none;
+        border-radius: 50%;
+        background: #fff;
+        color: #333;
+        font-size: 11px;
+        cursor: pointer;
+      }
+      #player.claro {
+        background: rgba(255, 255, 255, 0.6);
+        color: #3A2A14;
+        text-shadow: none;
+        border-color: rgba(106, 75, 24, 0.15);
+      }
+      #player.claro #playBtn { background: #3A2A14; color: #fff; }
+      #ytHolder {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 1px;
+        height: 1px;
+        opacity: 0.01;
+        pointer-events: none;
+      }
+    </style>
   </head>
   <body>
-    <div class="candle-count-display">
-      Candles on the Cake: <span id="candleCount">0</span>
+    <!-- Reproductor -->
+    <div id="player" class="hidden">
+      <div class="info">
+        <span class="label">SONANDO AHORA</span>
+        <span class="titulo" id="songTitle">Nuestra canción</span>
+      </div>
+      <button id="playBtn" aria-label="Reproducir o pausar">&#9654;</button>
     </div>
-    <div class="cake">
-      <div class="plate"></div>
-      <div class="layer layer-bottom"></div>
-      <div class="layer layer-middle"></div>
-      <div class="layer layer-top"></div>
-      <div class="icing"></div>
-      <div class="drip drip1"></div>
-      <div class="drip drip2"></div>
-      <div class="drip drip3"></div>
-    </div>
-    <div id="shareBox">
-      <button id="shareBtn">Copiar link para enviar</button>
-      <span id="shareMsg"></span>
-    </div>
+    <div id="ytHolder"><div id="yt"></div></div>
+
+    <!-- 1. Candado -->
+    <section class="scene" id="sLock">
+      <h1 id="lockTitle"></h1>
+      <svg class="ramo" viewBox="0 0 200 200" aria-hidden="true">
+        <path d="M70 120 L100 196 L130 120 Z" fill="#F4EAD8" />
+        <path d="M70 120 L100 196 L100 120 Z" fill="#E6D8BF" />
+        <path d="M86 156 q14 10 28 0 M100 160 l-10 22 M100 160 l12 20" stroke="#E7A2B0" stroke-width="4" fill="none" stroke-linecap="round" />
+        <g fill="#6E9B78">
+          <ellipse cx="58" cy="96" rx="16" ry="7" transform="rotate(-30 58 96)" />
+          <ellipse cx="144" cy="94" rx="16" ry="7" transform="rotate(30 144 94)" />
+          <ellipse cx="80" cy="70" rx="12" ry="5" transform="rotate(-60 80 70)" />
+          <ellipse cx="124" cy="66" rx="12" ry="5" transform="rotate(60 124 66)" />
+        </g>
+        <g>
+          <circle cx="100" cy="92" r="22" fill="#F2A7B5" /><circle cx="100" cy="92" r="11" fill="#E0788D" />
+          <circle cx="72" cy="104" r="17" fill="#F7D774" /><circle cx="72" cy="104" r="6" fill="#E3A93B" />
+          <circle cx="128" cy="106" r="18" fill="#F6C2A6" /><circle cx="128" cy="106" r="8" fill="#E48F6E" />
+          <circle cx="84" cy="74" r="14" fill="#C9B6E8" /><circle cx="84" cy="74" r="5" fill="#9C82CF" />
+          <circle cx="118" cy="76" r="15" fill="#FFFFFF" /><circle cx="118" cy="76" r="5" fill="#F3CF5A" />
+          <circle cx="100" cy="118" r="13" fill="#E86A7E" /><circle cx="100" cy="118" r="5" fill="#B9435A" />
+        </g>
+      </svg>
+      <div class="pin-label">ESCRIBÍ EL CÓDIGO</div>
+      <div class="pin-dots" id="pinDots"><span></span><span></span><span></span><span></span></div>
+      <div class="teclado" id="teclado"></div>
+    </section>
+
+    <!-- 2. Sobre -->
+    <section class="scene" id="sEnvelope">
+      <div class="sobre">
+        <div class="tapa"></div>
+        <div class="sello"></div>
+        <div class="nombres">
+          <div id="sobrePara"></div>
+          <div id="sobreDe"></div>
+        </div>
+      </div>
+      <div class="tocar">TOCÁ PARA ABRIR</div>
+    </section>
+
+    <!-- 3. Pastel -->
+    <section class="scene" id="sCake">
+      <div class="candle-count-display">
+        Velas en el pastel: <span id="candleCount">0</span>
+      </div>
+      <div class="cake">
+        <div class="plate"></div>
+        <div class="layer layer-bottom"></div>
+        <div class="layer layer-middle"></div>
+        <div class="layer layer-top"></div>
+        <div class="icing"></div>
+        <div class="drip drip1"></div>
+        <div class="drip drip2"></div>
+        <div class="drip drip3"></div>
+      </div>
+      <div id="shareBox">
+        <button id="shareBtn">Copiar link para enviar</button>
+        <span id="shareMsg"></span>
+      </div>
+    </section>
+
+    <!-- 4. Video -->
+    <section class="scene" id="sVideo">
+      <h1 id="videoTitle"></h1>
+      <video id="video" src="video.mp4" playsinline muted controls preload="auto"></video>
+      <div><button class="btn btn-crema" data-next="sMixtape">SEGUIR</button></div>
+    </section>
+
+    <!-- 5. Mixtape -->
+    <section class="scene" id="sMixtape">
+      <div class="mix">
+        <div class="para" id="mixPara"></div>
+        <h2 id="mixTitle"></h2>
+        <div class="cassette" id="cassette">
+          <div class="etiqueta"></div>
+          <div class="titulo-cinta" id="mixTitle2"></div>
+          <div class="ventana"><div class="rueda"></div><div class="rueda"></div></div>
+          <svg class="lazo" viewBox="0 0 40 26" aria-hidden="true">
+            <path d="M20 13 L4 3 Q0 13 4 23 Z M20 13 L36 3 Q40 13 36 23 Z" fill="#F2A7B5" />
+            <circle cx="20" cy="13" r="4" fill="#E0788D" />
+          </svg>
+          <div class="base"></div>
+        </div>
+        <div class="pistas" id="pistas"></div>
+        <div class="nota">
+          <div class="lbl">NOTA</div>
+          <p id="mixNota"></p>
+        </div>
+        <div class="tira" id="tiraFotos"></div>
+        <div class="seguir"><button class="btn btn-vino" data-next="sScrap">SEGUIR</button></div>
+      </div>
+    </section>
+
+    <!-- 6. Scrapbook -->
+    <section class="scene" id="sScrap">
+      <h2 id="scrapTitle"></h2>
+      <div class="collage" id="collage"></div>
+    </section>
+
+    <div id="lightbox" class="hidden"><img id="lightboxImg" alt="" /></div>
+
     <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const cake = document.querySelector(".cake");
-  const candleCountDisplay = document.getElementById("candleCount");
-  const shareBtn = document.getElementById("shareBtn");
-  const shareMsg = document.getElementById("shareMsg");
-  let candles = [];
-  let audioContext;
-  let analyser;
-  let microphone;
+      /* =====================================================
+         CONFIGURACIÓN
+         ===================================================== */
+      const CONFIG = {
+        para: "sofi",
+        de: "pablo",
+        tituloCandado: "my world",
+        codigo: "0811",
+        tituloVideo: "¡Feliz cumpleaños!",
 
-  function updateCandleCount() {
-    const activeCandles = candles.filter(
-      (candle) => !candle.classList.contains("out")
-    ).length;
-    candleCountDisplay.textContent = activeCandles;
-  }
+        // Canción de fondo (suena desde que mete el código)
+        cancion: "https://www.youtube.com/watch?v=HfkjnAv_uRE",
+        inicio: 2,
 
-  function addCandle(left, top) {
-    const candle = document.createElement("div");
-    candle.className = "candle";
-    candle.style.left = left + "px";
-    candle.style.top = top + "px";
-    candle.dataset.x = Math.round(left);
-    candle.dataset.y = Math.round(top);
+        // Mixtape
+        tituloMixtape: "Las Rolas",
+        notaMixtape:
+          "Para mi novia, feliz cumpleaños a la flor más linda y perfecta de todo el jardín. Te amo con locura.",
+        pistas: [
+          { titulo: "Honey", artista: "Jesse Baez", url: "https://www.youtube.com/watch?v=F5iI0USuCrI" },
+          { titulo: "world is yours.", artista: "Brent Faiyaz", url: "https://www.youtube.com/watch?v=ALRhYNVnDXQ" },
+        ],
+        fotosMixtape: [],
 
-    const flame = document.createElement("div");
-    flame.className = "flame";
-    candle.appendChild(flame);
+        // Scrapbook
+        tituloScrapbook: "Unas cuantas fotos para que recuerdes.",
+        cancionScrapbook: "https://www.youtube.com/watch?v=F5iI0USuCrI",
+        fotosScrapbook: Array.from({ length: 18 }, (_, i) => "fotos/s" + (i + 1) + ".jpg"),
+      };
+      /* ===================================================== */
 
-    cake.appendChild(candle);
-    candles.push(candle);
-    updateCandleCount();
-  }
+      function ytId(url) {
+        const m = (url || "").match(/(?:youtu\.be\/|v=|shorts\/|embed\/)([\w-]{11})/);
+        return m ? m[1] : "";
+      }
 
-  // Las velas viajan dentro del link: #c=x.y,x.y,...
-  function loadCandlesFromLink() {
-    const match = location.hash.match(/c=([\d.,]+)/);
-    if (!match) return false;
-    match[1].split(",").forEach((pair) => {
-      const [x, y] = pair.split(".").map(Number);
-      if (!isNaN(x) && !isNaN(y)) addCandle(x, y);
-    });
-    return candles.length > 0;
-  }
+      // ---------- Música (YouTube) ----------
+      let player = null;
+      let playerReady = false;
+      let pending = null;
+      let currentId = "";
+      const playBtn = document.getElementById("playBtn");
+      const songTitle = document.getElementById("songTitle");
 
-  function buildLink() {
-    const data = candles.map((c) => c.dataset.x + "." + c.dataset.y).join(",");
-    return location.origin + location.pathname + "#c=" + data;
-  }
+      (function loadYT() {
+        const tag = document.createElement("script");
+        tag.src = "https://www.youtube.com/iframe_api";
+        document.head.appendChild(tag);
+      })();
 
-  const isRecipient = loadCandlesFromLink();
-  if (isRecipient) {
-    shareBtn.style.display = "none";
-    shareMsg.textContent = "Soplá al micrófono para apagar las velas";
-  }
+      window.onYouTubeIframeAPIReady = function () {
+        player = new YT.Player("yt", {
+          width: 200,
+          height: 200,
+          videoId: ytId(CONFIG.cancion),
+          playerVars: { playsinline: 1, controls: 0, start: CONFIG.inicio },
+          events: {
+            onReady: function () {
+              playerReady = true;
+              if (pending) { const p = pending; pending = null; playSong(p.url, p.start); }
+            },
+            onStateChange: function (e) {
+              const playing = e.data === YT.PlayerState.PLAYING;
+              playBtn.innerHTML = playing ? "&#10074;&#10074;" : "&#9654;";
+              document.getElementById("cassette").classList.toggle("sonando", playing);
+              const data = player.getVideoData && player.getVideoData();
+              if (data && data.title) songTitle.textContent = data.title;
+              if (e.data === YT.PlayerState.ENDED) player.playVideo();
+            },
+          },
+        });
+      };
 
-  cake.addEventListener("click", function (event) {
-    if (isRecipient) return;
-    const rect = cake.getBoundingClientRect();
-    addCandle(event.clientX - rect.left, event.clientY - rect.top);
-  });
-
-  shareBtn.addEventListener("click", function () {
-    if (candles.length === 0) {
-      shareMsg.textContent = "Primero poné velas en el pastel";
-      return;
-    }
-    const link = buildLink();
-    navigator.clipboard.writeText(link).then(
-      () => (shareMsg.textContent = "Link copiado"),
-      () => (shareMsg.textContent = link)
-    );
-  });
-
-  // Algunos navegadores dejan el audio "suspendido" hasta que la persona toca la pantalla
-  document.addEventListener("click", function () {
-    if (audioContext && audioContext.state === "suspended") audioContext.resume();
-  });
-  document.addEventListener("touchstart", function () {
-    if (audioContext && audioContext.state === "suspended") audioContext.resume();
-  });
-
-  function isBlowing() {
-    const bufferLength = analyser.frequencyBinCount;
-    const dataArray = new Uint8Array(bufferLength);
-    analyser.getByteFrequencyData(dataArray);
-    let sum = 0;
-    for (let i = 0; i < bufferLength; i++) sum += dataArray[i];
-    return sum / bufferLength > 40;
-  }
-
-  function blowOutCandles() {
-    let blownOut = 0;
-    if (isBlowing()) {
-      candles.forEach((candle) => {
-        if (!candle.classList.contains("out") && Math.random() > 0.5) {
-          candle.classList.add("out");
-          blownOut++;
+      // Llamar siempre desde un toque, para que el teléfono deje sonar la música
+      function playSong(url, start) {
+        const id = ytId(url);
+        if (!id) return;
+        document.getElementById("player").classList.remove("hidden");
+        if (!playerReady) { pending = { url, start }; return; }
+        if (id === currentId) { player.playVideo(); return; }
+        currentId = id;
+        if (id === player.getVideoData().video_id) {
+          player.seekTo(start || 0, true);
+          player.playVideo();
+        } else {
+          player.loadVideoById({ videoId: id, startSeconds: start || 0 });
         }
-      });
-    }
-    if (blownOut > 0) updateCandleCount();
-  }
+      }
 
-  if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-    navigator.mediaDevices
-      .getUserMedia({ audio: true })
-      .then(function (stream) {
-        audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        analyser = audioContext.createAnalyser();
-        microphone = audioContext.createMediaStreamSource(stream);
-        microphone.connect(analyser);
-        analyser.fftSize = 256;
-        setInterval(blowOutCandles, 200);
-      })
-      .catch(function (err) {
-        console.log("Unable to access microphone: " + err);
+      playBtn.addEventListener("click", function () {
+        if (!playerReady) return;
+        if (player.getPlayerState() === YT.PlayerState.PLAYING) player.pauseVideo();
+        else player.playVideo();
       });
-  }
-});
-</script>
+
+      // ---------- Escenas ----------
+      function go(id) {
+        document.querySelectorAll(".scene").forEach((s) => s.classList.remove("active"));
+        const el = document.getElementById(id);
+        el.classList.add("active");
+        el.scrollTop = 0;
+        document.getElementById("player").classList.toggle("claro", id === "sEnvelope" || id === "sMixtape");
+        if (id === "sVideo") document.getElementById("video").play().catch(() => {});
+        else document.getElementById("video").pause();
+        if (id === "sScrap") playSong(CONFIG.cancionScrapbook, 0);
+        // Música más baja mientras sopla, para que el micrófono no la confunda con un soplido
+        if (playerReady) player.setVolume(id === "sCake" ? 25 : 100);
+      }
+      document.querySelectorAll("[data-next]").forEach((b) =>
+        b.addEventListener("click", () => go(b.dataset.next))
+      );
+
+      // ---------- Textos y fotos ----------
+      function polaroid(src) {
+        const div = document.createElement("div");
+        div.className = "polaroid";
+        const img = document.createElement("img");
+        img.src = src;
+        img.loading = "lazy";
+        img.alt = "";
+        img.onerror = () => div.remove();
+        div.appendChild(img);
+        div.addEventListener("click", () => {
+          document.getElementById("lightboxImg").src = src;
+          document.getElementById("lightbox").classList.remove("hidden");
+        });
+        return div;
+      }
+      document.getElementById("lightbox").addEventListener("click", function () {
+        this.classList.add("hidden");
+      });
+
+      document.getElementById("lockTitle").textContent = CONFIG.tituloCandado;
+      document.getElementById("sobrePara").textContent = "Para " + CONFIG.para;
+      document.getElementById("sobreDe").textContent = "De " + CONFIG.de;
+      document.getElementById("videoTitle").textContent = CONFIG.tituloVideo;
+      document.getElementById("mixPara").textContent =
+        ("PARA " + CONFIG.para + " · DE " + CONFIG.de).toUpperCase();
+      document.getElementById("mixTitle").textContent = CONFIG.tituloMixtape;
+      document.getElementById("mixTitle2").textContent = CONFIG.tituloMixtape;
+      document.getElementById("mixNota").textContent = CONFIG.notaMixtape;
+      document.getElementById("scrapTitle").textContent = CONFIG.tituloScrapbook;
+
+      const pistasEl = document.getElementById("pistas");
+      CONFIG.pistas.forEach((p, i) => {
+        const row = document.createElement("div");
+        row.className = "pista";
+        row.innerHTML =
+          '<span class="num">0' + (i + 1) + '</span><span class="txt"><div class="t"></div><div class="a"></div></span><span class="play">&#9654;</span>';
+        row.querySelector(".t").textContent = p.titulo;
+        row.querySelector(".a").textContent = p.artista;
+        row.addEventListener("click", () => playSong(p.url, 0));
+        pistasEl.appendChild(row);
+      });
+      CONFIG.fotosMixtape.forEach((f) => document.getElementById("tiraFotos").appendChild(polaroid(f)));
+      if (!CONFIG.fotosMixtape.length) document.getElementById("tiraFotos").style.display = "none";
+      const collage = document.getElementById("collage");
+      CONFIG.fotosScrapbook.forEach((f) => {
+        const p = polaroid(f);
+        p.style.transform = "rotate(" + (Math.random() * 10 - 5).toFixed(1) + "deg)";
+        collage.appendChild(p);
+      });
+
+      // ---------- Pastel ----------
+      const cake = document.querySelector(".cake");
+      const candleCountDisplay = document.getElementById("candleCount");
+      const shareBtn = document.getElementById("shareBtn");
+      const shareMsg = document.getElementById("shareMsg");
+      let candles = [];
+      let audioContext, analyser;
+      let micStarted = false;
+      let finished = false;
+      let isRecipient = false;
+
+      function updateCandleCount() {
+        const active = candles.filter((c) => !c.classList.contains("out")).length;
+        candleCountDisplay.textContent = active;
+        if (isRecipient && candles.length > 0 && active === 0 && !finished) {
+          finished = true;
+          setTimeout(() => go("sVideo"), 1500);
+        }
+      }
+
+      function addCandle(left, top) {
+        const candle = document.createElement("div");
+        candle.className = "candle";
+        candle.style.left = left + "px";
+        candle.style.top = top + "px";
+        candle.dataset.x = Math.round(left);
+        candle.dataset.y = Math.round(top);
+        const flame = document.createElement("div");
+        flame.className = "flame";
+        candle.appendChild(flame);
+        cake.appendChild(candle);
+        candles.push(candle);
+        updateCandleCount();
+      }
+
+      // Las velas viajan dentro del link: #c=x.y,x.y,...
+      function loadCandlesFromLink() {
+        const match = location.hash.match(/c=([\d.,]+)/);
+        if (!match) return false;
+        match[1].split(",").forEach((pair) => {
+          const [x, y] = pair.split(".").map(Number);
+          if (!isNaN(x) && !isNaN(y)) addCandle(x, y);
+        });
+        return candles.length > 0;
+      }
+
+      function micLevel() {
+        const data = new Float32Array(analyser.fftSize);
+        analyser.getFloatTimeDomainData(data);
+        let sum = 0;
+        for (let i = 0; i < data.length; i++) sum += data[i] * data[i];
+        return Math.sqrt(sum / data.length);
+      }
+
+      function blowOutCandles() {
+        if (finished || !document.getElementById("sCake").classList.contains("active")) return;
+        if (micLevel() < 0.12) return;
+        let blownOut = 0;
+        candles.forEach((c) => {
+          if (!c.classList.contains("out") && Math.random() > 0.5) {
+            c.classList.add("out");
+            blownOut++;
+          }
+        });
+        if (blownOut > 0) updateCandleCount();
+      }
+
+      // El micrófono se activa con un toque y sin supresión de ruido (si no, borra el soplido)
+      function startMic() {
+        if (micStarted) return Promise.resolve();
+        micStarted = true;
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        audioContext.resume();
+        return navigator.mediaDevices
+          .getUserMedia({ audio: { noiseSuppression: false, echoCancellation: false, autoGainControl: false } })
+          .then((stream) => {
+            analyser = audioContext.createAnalyser();
+            analyser.fftSize = 1024;
+            audioContext.createMediaStreamSource(stream).connect(analyser);
+            audioContext.resume();
+            setInterval(blowOutCandles, 150);
+            if (isRecipient) shareMsg.textContent = "Soplá al micrófono para apagar las velas";
+          })
+          .catch((err) => {
+            micStarted = false;
+            shareMsg.textContent = "No se pudo usar el micrófono. Revisá los permisos.";
+            console.log("Unable to access microphone: " + err);
+          });
+      }
+
+      isRecipient = loadCandlesFromLink();
+
+      if (isRecipient) {
+        // Ella: candado -> sobre -> pastel -> video -> mixtape -> scrapbook
+        shareBtn.style.display = "none";
+        let pin = "";
+        const dots = document.getElementById("pinDots");
+        const teclado = document.getElementById("teclado");
+        ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0", "borrar"].forEach((k) => {
+          const b = document.createElement("button");
+          if (k === "") b.className = "vacio";
+          else if (k === "borrar") { b.className = "borrar"; b.textContent = "Borrar"; }
+          else b.textContent = k;
+          b.addEventListener("click", () => {
+            if (k === "borrar") pin = pin.slice(0, -1);
+            else if (k && pin.length < 4) pin += k;
+            [...dots.children].forEach((d, i) => d.classList.toggle("on", i < pin.length));
+            if (pin.length === 4) {
+              if (pin === CONFIG.codigo) {
+                playSong(CONFIG.cancion, CONFIG.inicio);
+                setTimeout(() => go("sEnvelope"), 400);
+              } else {
+                dots.classList.add("mal");
+                setTimeout(() => {
+                  dots.classList.remove("mal");
+                  pin = "";
+                  [...dots.children].forEach((d) => d.classList.remove("on"));
+                }, 450);
+              }
+            }
+          });
+          teclado.appendChild(b);
+        });
+
+        const env = document.getElementById("sEnvelope");
+        env.addEventListener("click", () => {
+          if (env.classList.contains("open")) return;
+          env.classList.add("open");
+          startMic();
+          setTimeout(() => go("sCake"), 1200);
+        });
+
+        go("sLock");
+      } else {
+        // Vos: poner velas y copiar el link
+        cake.addEventListener("click", (event) => {
+          startMic();
+          const rect = cake.getBoundingClientRect();
+          addCandle(event.clientX - rect.left, event.clientY - rect.top);
+        });
+        shareBtn.addEventListener("click", () => {
+          if (candles.length === 0) {
+            shareMsg.textContent = "Primero poné velas en el pastel";
+            return;
+          }
+          const link = location.origin + location.pathname + "#c=" +
+            candles.map((c) => c.dataset.x + "." + c.dataset.y).join(",");
+          navigator.clipboard.writeText(link).then(
+            () => (shareMsg.textContent = "Link copiado"),
+            () => (shareMsg.textContent = link)
+          );
+        });
+        go("sCake");
+      }
+    </script>
   </body>
 </html>
