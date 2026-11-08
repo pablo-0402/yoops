@@ -25,6 +25,131 @@
       <div class="drip drip2"></div>
       <div class="drip drip3"></div>
     </div>
-    <script src="script.js"></script>
+    <div id="shareBox">
+      <button id="shareBtn">Copiar link para enviar</button>
+      <span id="shareMsg"></span>
+    </div>
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+  const cake = document.querySelector(".cake");
+  const candleCountDisplay = document.getElementById("candleCount");
+  const shareBtn = document.getElementById("shareBtn");
+  const shareMsg = document.getElementById("shareMsg");
+  let candles = [];
+  let audioContext;
+  let analyser;
+  let microphone;
+
+  function updateCandleCount() {
+    const activeCandles = candles.filter(
+      (candle) => !candle.classList.contains("out")
+    ).length;
+    candleCountDisplay.textContent = activeCandles;
+  }
+
+  function addCandle(left, top) {
+    const candle = document.createElement("div");
+    candle.className = "candle";
+    candle.style.left = left + "px";
+    candle.style.top = top + "px";
+    candle.dataset.x = Math.round(left);
+    candle.dataset.y = Math.round(top);
+
+    const flame = document.createElement("div");
+    flame.className = "flame";
+    candle.appendChild(flame);
+
+    cake.appendChild(candle);
+    candles.push(candle);
+    updateCandleCount();
+  }
+
+  // Las velas viajan dentro del link: #c=x.y,x.y,...
+  function loadCandlesFromLink() {
+    const match = location.hash.match(/c=([\d.,]+)/);
+    if (!match) return false;
+    match[1].split(",").forEach((pair) => {
+      const [x, y] = pair.split(".").map(Number);
+      if (!isNaN(x) && !isNaN(y)) addCandle(x, y);
+    });
+    return candles.length > 0;
+  }
+
+  function buildLink() {
+    const data = candles.map((c) => c.dataset.x + "." + c.dataset.y).join(",");
+    return location.origin + location.pathname + "#c=" + data;
+  }
+
+  const isRecipient = loadCandlesFromLink();
+  if (isRecipient) {
+    shareBtn.style.display = "none";
+    shareMsg.textContent = "Soplá al micrófono para apagar las velas";
+  }
+
+  cake.addEventListener("click", function (event) {
+    if (isRecipient) return;
+    const rect = cake.getBoundingClientRect();
+    addCandle(event.clientX - rect.left, event.clientY - rect.top);
+  });
+
+  shareBtn.addEventListener("click", function () {
+    if (candles.length === 0) {
+      shareMsg.textContent = "Primero poné velas en el pastel";
+      return;
+    }
+    const link = buildLink();
+    navigator.clipboard.writeText(link).then(
+      () => (shareMsg.textContent = "Link copiado"),
+      () => (shareMsg.textContent = link)
+    );
+  });
+
+  // Algunos navegadores dejan el audio "suspendido" hasta que la persona toca la pantalla
+  document.addEventListener("click", function () {
+    if (audioContext && audioContext.state === "suspended") audioContext.resume();
+  });
+  document.addEventListener("touchstart", function () {
+    if (audioContext && audioContext.state === "suspended") audioContext.resume();
+  });
+
+  function isBlowing() {
+    const bufferLength = analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
+    analyser.getByteFrequencyData(dataArray);
+    let sum = 0;
+    for (let i = 0; i < bufferLength; i++) sum += dataArray[i];
+    return sum / bufferLength > 40;
+  }
+
+  function blowOutCandles() {
+    let blownOut = 0;
+    if (isBlowing()) {
+      candles.forEach((candle) => {
+        if (!candle.classList.contains("out") && Math.random() > 0.5) {
+          candle.classList.add("out");
+          blownOut++;
+        }
+      });
+    }
+    if (blownOut > 0) updateCandleCount();
+  }
+
+  if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    navigator.mediaDevices
+      .getUserMedia({ audio: true })
+      .then(function (stream) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        analyser = audioContext.createAnalyser();
+        microphone = audioContext.createMediaStreamSource(stream);
+        microphone.connect(analyser);
+        analyser.fftSize = 256;
+        setInterval(blowOutCandles, 200);
+      })
+      .catch(function (err) {
+        console.log("Unable to access microphone: " + err);
+      });
+  }
+});
+</script>
   </body>
 </html>
