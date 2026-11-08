@@ -416,7 +416,7 @@
         color: #fff;
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
         font-family: var(--sans);
-        max-width: 78vw;
+        max-width: calc(100vw - 130px);
       }
       #player .info { display: flex; flex-direction: column; min-width: 0; }
       #player .label { font-size: 9px; letter-spacing: 1.5px; opacity: 0.8; }
@@ -447,7 +447,36 @@
         height: 1px;
         opacity: 0.01;
         pointer-events: none;
+        overflow: hidden;
       }
+      /* En el sobre, el reproductor de YouTube cubre la pantalla (invisible):
+         así el toque cae en YouTube y el teléfono deja sonar la música */
+      #ytHolder.encima {
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 20;
+        pointer-events: auto;
+      }
+      #ytHolder iframe { width: 100%; height: 100%; }
+      #backBtn {
+        position: fixed;
+        top: 16px;
+        left: 12px;
+        z-index: 41;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        background: rgba(255, 255, 255, 0.2);
+        -webkit-backdrop-filter: blur(14px);
+        backdrop-filter: blur(14px);
+        color: #fff;
+        font-size: 20px;
+        line-height: 1;
+        cursor: pointer;
+      }
+      #backBtn.claro { background: rgba(255, 255, 255, 0.6); color: #3A2A14; border-color: rgba(106, 75, 24, 0.15); }
     </style>
   </head>
   <body>
@@ -460,6 +489,7 @@
       <button id="playBtn" aria-label="Reproducir o pausar">&#9654;</button>
     </div>
     <div id="ytHolder"><div id="yt"></div></div>
+    <button id="backBtn" class="hidden" aria-label="Regresar">&larr;</button>
 
     <!-- 1. Candado -->
     <section class="scene" id="sLock">
@@ -622,10 +652,17 @@
           events: {
             onReady: function () {
               playerReady = true;
+              if (document.getElementById("sEnvelope").classList.contains("active"))
+                document.getElementById("ytHolder").classList.add("encima");
               if (pending) { const p = pending; pending = null; playSong(p.url, p.start); }
             },
             onStateChange: function (e) {
               const playing = e.data === YT.PlayerState.PLAYING;
+              if (playing) {
+                currentId = player.getVideoData().video_id;
+                document.getElementById("player").classList.remove("hidden");
+                if (typeof openEnvelope === "function") openEnvelope();
+              }
               playBtn.innerHTML = playing ? "&#10074;&#10074;" : "&#9654;";
               document.getElementById("cassette").classList.toggle("sonando", playing);
               const data = player.getVideoData && player.getVideoData();
@@ -670,7 +707,17 @@
         if (id === "sScrap") playSong(CONFIG.cancionScrapbook, 0);
         // Música más baja mientras sopla, para que el micrófono no la confunda con un soplido
         if (playerReady) player.setVolume(id === "sCake" ? 25 : 100);
+        document.getElementById("ytHolder").classList.toggle("encima", id === "sEnvelope" && playerReady);
+        const back = document.getElementById("backBtn");
+        back.classList.toggle("hidden", !BACK[id]);
+        back.classList.toggle("claro", id === "sMixtape");
       }
+      const BACK = { sVideo: "sCake", sMixtape: "sVideo", sScrap: "sMixtape" };
+      document.getElementById("backBtn").addEventListener("click", () => {
+        const id = document.querySelector(".scene.active").id;
+        if (BACK[id] === "sCake") relightCandles();
+        if (BACK[id]) go(BACK[id]);
+      });
       document.querySelectorAll("[data-next]").forEach((b) =>
         b.addEventListener("click", () => go(b.dataset.next))
       );
@@ -744,6 +791,12 @@
           finished = true;
           setTimeout(() => go("sVideo"), 1500);
         }
+      }
+
+      function relightCandles() {
+        candles.forEach((c) => c.classList.remove("out"));
+        finished = false;
+        updateCandleCount();
       }
 
       function addCandle(left, top) {
@@ -835,7 +888,7 @@
             [...dots.children].forEach((d, i) => d.classList.toggle("on", i < pin.length));
             if (pin.length === 4) {
               if (pin === CONFIG.codigo) {
-                playSong(CONFIG.cancion, CONFIG.inicio);
+                startMic();
                 setTimeout(() => go("sEnvelope"), 400);
               } else {
                 dots.classList.add("mal");
@@ -851,12 +904,34 @@
         });
 
         const env = document.getElementById("sEnvelope");
-        env.addEventListener("click", () => {
-          if (env.classList.contains("open")) return;
+        window.openEnvelope = function () {
+          if (!env.classList.contains("active") || env.classList.contains("open")) return;
           env.classList.add("open");
-          startMic();
+          document.getElementById("ytHolder").classList.remove("encima");
+          if (audioContext) audioContext.resume();
+          // Por si el toque no arrancó la canción (algunos navegadores)
+          setTimeout(() => {
+            if (playerReady && player.getPlayerState() !== YT.PlayerState.PLAYING) {
+              currentId = "";
+              playSong(CONFIG.cancion, CONFIG.inicio);
+            }
+          }, 1500);
           setTimeout(() => go("sCake"), 1200);
+        };
+        env.addEventListener("click", () => {
+          if (playerReady) playSong(CONFIG.cancion, CONFIG.inicio);
+          openEnvelope();
         });
+        // Cuando el toque cae dentro del reproductor de YouTube, la página pierde el foco
+        window.addEventListener("blur", () =>
+          setTimeout(() => {
+            const a = document.activeElement;
+            if (a && a.tagName === "IFRAME") {
+              openEnvelope();
+              a.blur();
+            }
+          }, 0)
+        );
 
         go("sLock");
       } else {
