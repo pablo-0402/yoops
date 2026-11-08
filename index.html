@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./style.css" />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Caveat:wght@500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Caveat:wght@500&family=Nunito:wght@600;700;800;900&display=swap"
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
     <style>
@@ -24,7 +24,7 @@
         --azul: #8DB0DA;
         --serif: "Cormorant Garamond", Georgia, serif;
         --mano: "Caveat", "Comic Sans MS", cursive;
-        --sans: "Cormorant Garamond", Georgia, serif;
+        --sans: "Nunito", "Arial Rounded MT Bold", Arial, sans-serif;
       }
       html, body { height: 100%; }
       body { overflow: hidden; }
@@ -47,8 +47,8 @@
         border-radius: 999px;
         padding: 12px 26px;
         font-family: var(--sans);
-        font-weight: 700;
-        font-size: 17px;
+        font-weight: 900;
+        font-size: 15px;
         letter-spacing: 1.5px;
         cursor: pointer;
       }
@@ -71,8 +71,8 @@
       #sLock .ramo { width: 190px; height: 190px; margin: 6px auto 0; display: block; }
       .pin-label {
         font-family: var(--sans);
-        font-weight: 600;
-        font-size: 15px;
+        font-weight: 800;
+        font-size: 12px;
         letter-spacing: 3px;
         margin-top: 10px;
         opacity: 0.9;
@@ -106,13 +106,13 @@
         background: rgba(255, 255, 255, 0.22);
         color: #fff;
         font-family: var(--sans);
-        font-weight: 600;
-        font-size: 31px;
+        font-weight: 800;
+        font-size: 27px;
         cursor: pointer;
       }
       .teclado button:active { background: rgba(255, 255, 255, 0.45); }
       .teclado .vacio { visibility: hidden; }
-      .teclado .borrar { font-size: 19px; font-style: italic; background: transparent; }
+      .teclado .borrar { font-size: 15px; background: transparent; }
 
       /* ---------- 2. Sobre ---------- */
       #sEnvelope {
@@ -171,8 +171,8 @@
         margin-top: 30px;
         color: var(--cafe);
         font-family: var(--sans);
-        font-weight: 700;
-        font-size: 16px;
+        font-weight: 900;
+        font-size: 13px;
         letter-spacing: 3px;
         animation: latido 1.6s ease-in-out infinite;
       }
@@ -182,11 +182,11 @@
       #sCake { background: #333; }
       #sCake .candle-count-display {
         margin-top: 110px;
-        font-family: var(--serif);
-        font-weight: 600;
-        font-size: 22px;
+        font-family: var(--sans);
+        font-weight: 800;
+        font-size: 18px;
       }
-      #shareBtn, #shareMsg { font-family: var(--serif) !important; font-weight: 600; font-size: 18px !important; }
+      #shareBtn, #shareMsg { font-family: var(--sans) !important; font-weight: 800; font-size: 15px !important; }
       #shareBox {
         position: absolute;
         bottom: 34px;
@@ -206,9 +206,12 @@
       }
       #sVideo h1 { color: var(--papel); font-weight: 500; font-size: 38px; margin: 0 0 20px; }
       #sVideo video {
-        width: 100%;
-        max-width: 640px;
-        border-radius: 10px;
+        display: block;
+        margin: 0 auto;
+        width: auto;
+        max-width: 100%;
+        max-height: 66vh;
+        border-radius: 12px;
         background: #000;
         box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
       }
@@ -225,14 +228,14 @@
       .mix { max-width: 560px; margin: 0 auto; }
       .mix .para {
         font-family: var(--sans);
-        font-weight: 700;
-        font-size: 14px;
+        font-weight: 900;
+        font-size: 11px;
         letter-spacing: 2.5px;
         color: var(--vino);
       }
       .mix h2 { font-weight: 500; font-size: 42px; margin: 4px 0 18px; }
       .cassette {
-        width: 340px;
+        width: 380px;
         max-width: 100%;
         margin: 0 auto 26px;
         filter: drop-shadow(0 14px 18px rgba(35, 64, 47, 0.3));
@@ -252,8 +255,8 @@
       }
       .pista .num { font-style: italic; font-size: 18px; width: 22px; }
       .pista .txt { flex: 1; font-family: var(--sans); }
-      .pista .t { font-size: 19px; font-weight: 600; color: #222; }
-      .pista .a { font-size: 14px; opacity: 0.65; }
+      .pista .t { font-size: 15px; font-weight: 800; color: #222; }
+      .pista .a { font-size: 12px; font-weight: 600; opacity: 0.65; }
       .pista .play {
         width: 34px;
         height: 34px;
@@ -271,7 +274,7 @@
         box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
         transform: rotate(-1deg);
       }
-      .nota .lbl { font-family: var(--sans); font-weight: 700; font-size: 14px; letter-spacing: 2px; margin-bottom: 6px; }
+      .nota .lbl { font-family: var(--sans); font-weight: 900; font-size: 11px; letter-spacing: 2px; margin-bottom: 6px; }
       .nota p { margin: 0; font-style: italic; font-size: 21px; line-height: 1.35; }
       .tira {
         display: flex;
@@ -338,25 +341,28 @@
         position: absolute;
         top: 0;
         bottom: 0;
-        width: 52%;
-        background-color: #F7E3E1;
-        background-size: 150px 150px;
-        transition: transform 0.85s cubic-bezier(0.7, 0, 0.3, 1);
-        box-shadow: 0 0 30px rgba(120, 60, 70, 0.25);
+        width: calc(50% + 70px);
+        transition: transform 0.95s cubic-bezier(0.65, 0, 0.25, 1);
+        will-change: transform;
       }
-      #cortina .izq { left: 0; transform: translateX(calc(-100% - 70px)); }
-      #cortina .der { right: 0; transform: translateX(calc(100% + 70px)); }
+      #cortina .lado canvas { display: block; width: 100%; height: 100%; }
+      #cortina .izq { left: 0; transform: translateX(-102%); }
+      #cortina .der { right: 0; transform: translateX(102%); }
       #cortina.cerrada .izq, #cortina.cerrada .der { transform: translateX(0); }
-      #cortina .borde {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 76px;
-        background-size: 76px 120px;
-        background-repeat: repeat-y;
+      .petalo {
+        position: fixed;
+        top: -30px;
+        z-index: 56;
+        pointer-events: none;
+        border-radius: 70% 0 70% 0;
+        animation: caer linear forwards;
       }
-      #cortina .izq .borde { right: -38px; }
-      #cortina .der .borde { left: -38px; background-position: 0 60px; }
+      @keyframes caer {
+        0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+        10% { opacity: 1; }
+        50% { transform: translate(var(--dx), 55vh) rotate(220deg); }
+        100% { transform: translate(calc(var(--dx) * -0.4), 115vh) rotate(460deg); opacity: 0.9; }
+      }
 
       /* ---------- Foto grande ---------- */
       #lightbox {
@@ -394,8 +400,8 @@
         max-width: calc(100vw - 130px);
       }
       #player .info { display: flex; flex-direction: column; min-width: 0; }
-      #player .label { font-size: 12px; font-weight: 700; letter-spacing: 1.5px; opacity: 0.8; }
-      #player .titulo { font-size: 16px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      #player .label { font-size: 9.5px; font-weight: 900; letter-spacing: 1.5px; opacity: 0.8; }
+      #player .titulo { font-size: 13.5px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
       #playBtn {
         flex: none;
         width: 32px;
@@ -560,86 +566,113 @@
         <div class="para" id="mixPara"></div>
         <h2 id="mixTitle"></h2>
         <div class="cassette" id="cassette">
-          <svg viewBox="0 0 320 205" aria-hidden="true">
+          <svg viewBox="0 0 640 400" aria-hidden="true">
             <defs>
-              <linearGradient id="cuerpo" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#83AE8C" />
-                <stop offset="1" stop-color="#5E8B69" />
+              <linearGradient id="carcasa" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#A69C92" stop-opacity="0.78" />
+                <stop offset="0.5" stop-color="#857A70" stop-opacity="0.72" />
+                <stop offset="1" stop-color="#6E645B" stop-opacity="0.8" />
               </linearGradient>
-              <radialGradient id="tornillo" cx="35%" cy="35%" r="70%">
-                <stop offset="0" stop-color="#F2EEE4" />
-                <stop offset="1" stop-color="#9C9584" />
-              </radialGradient>
-              <radialGradient id="cinta" cx="50%" cy="50%" r="50%">
-                <stop offset="0.55" stop-color="#4A3426" />
-                <stop offset="1" stop-color="#2B1D15" />
-              </radialGradient>
-              <pattern id="cuadros" width="12" height="12" patternUnits="userSpaceOnUse">
-                <rect width="12" height="12" fill="#DCEBD6" />
-                <rect width="6" height="6" fill="#C3DCBC" />
-                <rect x="6" y="6" width="6" height="6" fill="#C3DCBC" />
+              <pattern id="rejilla" width="7" height="7" patternUnits="userSpaceOnUse">
+                <path d="M7 0 H0 V7" fill="none" stroke="#FFFFFF" stroke-opacity="0.22" stroke-width="0.8" />
+                <path d="M7 7 H0" fill="none" stroke="#3B342E" stroke-opacity="0.18" stroke-width="0.6" />
               </pattern>
-              <linearGradient id="vidrio" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#fff" stop-opacity="0.28" />
-                <stop offset="0.45" stop-color="#fff" stop-opacity="0.04" />
-                <stop offset="1" stop-color="#fff" stop-opacity="0.12" />
+              <radialGradient id="tornilloOsc" cx="35%" cy="35%" r="70%">
+                <stop offset="0" stop-color="#5A5550" />
+                <stop offset="1" stop-color="#151515" />
+              </radialGradient>
+              <radialGradient id="carrete" cx="40%" cy="35%" r="70%">
+                <stop offset="0" stop-color="#FFFFFF" />
+                <stop offset="1" stop-color="#C9C9C9" />
+              </radialGradient>
+              <radialGradient id="rodillo" cx="40%" cy="35%" r="70%">
+                <stop offset="0" stop-color="#F6EEDB" />
+                <stop offset="1" stop-color="#CDBF9E" />
+              </radialGradient>
+              <linearGradient id="brillo" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.22" />
+                <stop offset="0.35" stop-color="#FFFFFF" stop-opacity="0" />
+                <stop offset="0.7" stop-color="#FFFFFF" stop-opacity="0.06" />
+                <stop offset="1" stop-color="#FFFFFF" stop-opacity="0" />
+              </linearGradient>
+              <linearGradient id="ventanaCentro" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#3B302A" />
+                <stop offset="0.5" stop-color="#6B5D52" />
+                <stop offset="1" stop-color="#3B302A" />
               </linearGradient>
             </defs>
-            <!-- cuerpo -->
-            <rect x="1" y="1" width="318" height="203" rx="14" fill="url(#cuerpo)" />
-            <rect x="5" y="5" width="310" height="195" rx="11" fill="none" stroke="#fff" stroke-opacity="0.18" stroke-width="1.2" />
-            <path d="M3 30 h3 M3 38 h3 M3 46 h3 M3 54 h3 M314 30 h3 M314 38 h3 M314 46 h3 M314 54 h3" stroke="#3E6448" stroke-opacity="0.5" stroke-width="1.2" />
+
+            <!-- carcasa transparente ahumada -->
+            <rect x="2" y="2" width="636" height="396" rx="16" fill="url(#carcasa)" />
+            <rect x="2" y="2" width="636" height="396" rx="16" fill="url(#rejilla)" />
+            <rect x="2" y="2" width="636" height="396" rx="16" fill="none" stroke="#4E463F" stroke-width="3" />
+            <rect x="12" y="12" width="616" height="376" rx="10" fill="none" stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="1.5" />
+            <path d="M14 70 H40 M14 120 H40 M14 170 H40 M600 70 H626 M600 120 H626 M600 170 H626" stroke="#2E2823" stroke-opacity="0.35" stroke-width="2" />
+
+            <!-- rodillos guía (abajo en las esquinas) -->
+            <circle cx="86" cy="346" r="22" fill="url(#rodillo)" stroke="#A3946F" stroke-width="1.2" />
+            <circle cx="86" cy="346" r="12" fill="none" stroke="#B5A684" stroke-width="2" />
+            <circle cx="86" cy="346" r="4" fill="#8D7E5C" />
+            <circle cx="554" cy="346" r="22" fill="url(#rodillo)" stroke="#A3946F" stroke-width="1.2" />
+            <circle cx="554" cy="346" r="12" fill="none" stroke="#B5A684" stroke-width="2" />
+            <circle cx="554" cy="346" r="4" fill="#8D7E5C" />
+
             <!-- etiqueta -->
-            <rect x="24" y="20" width="272" height="118" rx="7" fill="#F6F1E3" />
-            <rect x="24" y="20" width="272" height="24" rx="7" fill="url(#cuadros)" />
-            <rect x="24" y="37" width="272" height="7" fill="url(#cuadros)" />
-            <rect x="24" y="44" width="272" height="2.5" fill="#B23A48" opacity="0.75" />
-            <circle cx="42" cy="61" r="9" fill="#B23A48" />
-            <text x="42" y="65.5" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-weight="700" font-size="13" fill="#F6F1E3">A</text>
-            <text id="mixTitle2" x="60" y="68" font-family="Caveat, cursive" font-size="22" fill="#23402F"></text>
-            <text x="284" y="66" text-anchor="end" font-family="Cormorant Garamond, Georgia, serif" font-weight="700" font-size="9" letter-spacing="1" fill="#7A6E57">C-60</text>
-            <path d="M58 74 H284" stroke="#C9BFA8" stroke-width="0.8" />
+            <rect x="60" y="30" width="520" height="236" rx="5" fill="#F3F1EB" />
+            <rect x="60" y="30" width="520" height="236" rx="5" fill="none" stroke="#D8D4CA" stroke-width="1" />
+            <text x="80" y="57" font-family="Helvetica, Arial, sans-serif" font-size="10" letter-spacing="1.5" fill="#6A6560">INDEX</text>
+            <path d="M80 84 H560 M80 106 H560" stroke="#C9C4B8" stroke-width="1" />
+            <text id="mixTitle2" x="130" y="80" font-family="Caveat, cursive" font-size="26" fill="#2A2A2A"></text>
+
+            <!-- franja naranja -->
+            <rect x="60" y="116" width="520" height="90" fill="#F26A1B" />
+            <text x="96" y="202" font-family="Helvetica, Arial, sans-serif" font-size="30" fill="#1C1C1C">A</text>
+
             <!-- ventana -->
-            <rect x="72" y="78" width="176" height="36" rx="18" fill="#2F4A39" />
-            <circle cx="108" cy="95" r="15" fill="url(#cinta)"/>
-            <circle cx="108" cy="95" r="15" fill="none" stroke="#000" stroke-opacity="0.25" stroke-width="0.6" stroke-dasharray="0.6 1.4"/>
-            <g class="rueda" transform="translate(108 95)"><g>
-              <circle r="10.5" fill="#F4EEDF" stroke="#A89F8A" stroke-width="0.8"/>
-              <rect x="-1.6" y="-9" width="3.2" height="4" rx="0.8" fill="#BDB49F" transform="rotate(0)"/><rect x="-1.6" y="-9" width="3.2" height="4" rx="0.8" fill="#BDB49F" transform="rotate(60)"/><rect x="-1.6" y="-9" width="3.2" height="4" rx="0.8" fill="#BDB49F" transform="rotate(120)"/><rect x="-1.6" y="-9" width="3.2" height="4" rx="0.8" fill="#BDB49F" transform="rotate(180)"/><rect x="-1.6" y="-9" width="3.2" height="4" rx="0.8" fill="#BDB49F" transform="rotate(240)"/><rect x="-1.6" y="-9" width="3.2" height="4" rx="0.8" fill="#BDB49F" transform="rotate(300)"/>
-              <circle r="3.4" fill="#2A2A2A"/>
+            <rect x="138" y="122" width="364" height="72" rx="6" fill="#1C1A19" />
+            <rect x="262" y="128" width="116" height="60" rx="3" fill="url(#ventanaCentro)" />
+            <path d="M262 158 H378" stroke="#2A221E" stroke-width="10" opacity="0.55" />
+            <path d="M268 132 V184 M372 132 V184" stroke="#9B8C80" stroke-width="1.2" opacity="0.6" />
+            <path d="M300 130 V186 M340 130 V186" stroke="#FFFFFF" stroke-width="0.8" opacity="0.18" />
+            <g class="rueda" transform="translate(214 158)"><g>
+              <circle r="31" fill="url(#carrete)" stroke="#9A9A9A" stroke-width="1.2"/>
+              <circle r="21" fill="#2A2522"/>
+              <rect x="-3" y="-21" width="6" height="8" rx="1" fill="#E9E9E9" transform="rotate(0)"/><rect x="-3" y="-21" width="6" height="8" rx="1" fill="#E9E9E9" transform="rotate(60)"/><rect x="-3" y="-21" width="6" height="8" rx="1" fill="#E9E9E9" transform="rotate(120)"/><rect x="-3" y="-21" width="6" height="8" rx="1" fill="#E9E9E9" transform="rotate(180)"/><rect x="-3" y="-21" width="6" height="8" rx="1" fill="#E9E9E9" transform="rotate(240)"/><rect x="-3" y="-21" width="6" height="8" rx="1" fill="#E9E9E9" transform="rotate(300)"/>
+              <circle r="21" fill="none" stroke="#BFBFBF" stroke-width="1"/>
             </g></g>
-            <circle cx="212" cy="95" r="11.5" fill="url(#cinta)"/>
-            <circle cx="212" cy="95" r="11.5" fill="none" stroke="#000" stroke-opacity="0.25" stroke-width="0.6" stroke-dasharray="0.6 1.4"/>
-            <g class="rueda" transform="translate(212 95)"><g>
-              <circle r="10.5" fill="#F4EEDF" stroke="#A89F8A" stroke-width="0.8"/>
-              <rect x="-1.6" y="-9" width="3.2" height="4" rx="0.8" fill="#BDB49F" transform="rotate(0)"/><rect x="-1.6" y="-9" width="3.2" height="4" rx="0.8" fill="#BDB49F" transform="rotate(60)"/><rect x="-1.6" y="-9" width="3.2" height="4" rx="0.8" fill="#BDB49F" transform="rotate(120)"/><rect x="-1.6" y="-9" width="3.2" height="4" rx="0.8" fill="#BDB49F" transform="rotate(180)"/><rect x="-1.6" y="-9" width="3.2" height="4" rx="0.8" fill="#BDB49F" transform="rotate(240)"/><rect x="-1.6" y="-9" width="3.2" height="4" rx="0.8" fill="#BDB49F" transform="rotate(300)"/>
-              <circle r="3.4" fill="#2A2A2A"/>
+            <g class="rueda" transform="translate(426 158)"><g>
+              <circle r="31" fill="url(#carrete)" stroke="#9A9A9A" stroke-width="1.2"/>
+              <circle r="21" fill="#2A2522"/>
+              <rect x="-3" y="-21" width="6" height="8" rx="1" fill="#E9E9E9" transform="rotate(0)"/><rect x="-3" y="-21" width="6" height="8" rx="1" fill="#E9E9E9" transform="rotate(60)"/><rect x="-3" y="-21" width="6" height="8" rx="1" fill="#E9E9E9" transform="rotate(120)"/><rect x="-3" y="-21" width="6" height="8" rx="1" fill="#E9E9E9" transform="rotate(180)"/><rect x="-3" y="-21" width="6" height="8" rx="1" fill="#E9E9E9" transform="rotate(240)"/><rect x="-3" y="-21" width="6" height="8" rx="1" fill="#E9E9E9" transform="rotate(300)"/>
+              <circle r="21" fill="none" stroke="#BFBFBF" stroke-width="1"/>
             </g></g>
-            <path d="M108 110 Q160 116 212 106.5" stroke="#3A2A1F" stroke-width="2" fill="none" />
-            <rect x="140" y="84" width="40" height="22" rx="3" fill="#41604B" stroke="#24382B" stroke-width="0.8" />
-            <path d="M146 95 h28 M146 90 v10 M174 90 v10" stroke="#9FBFA6" stroke-width="0.7" opacity="0.7" />
-            <rect x="72" y="78" width="176" height="36" rx="18" fill="url(#vidrio)" />
-            <rect x="72.5" y="78.5" width="175" height="35" rx="17.5" fill="none" stroke="#000" stroke-opacity="0.35" />
-            <!-- lazo -->
-            <g transform="translate(262 116)">
-              <path d="M0 0 L-17 -10 Q-21 0 -17 10 Z M0 0 L17 -10 Q21 0 17 10 Z" fill="#F2A7B5" stroke="#D97C8F" stroke-width="0.8" />
-              <path d="M-2 2 L-9 16 M2 2 L8 16" stroke="#F2A7B5" stroke-width="3.5" stroke-linecap="round" />
-              <circle r="4" fill="#E0788D" />
-            </g>
-            <!-- flor -->
-            <g transform="translate(46 118)">
-              <circle cx="0" cy="-5" r="4.5" fill="#fff" /><circle cx="4.8" cy="-1.5" r="4.5" fill="#fff" />
-              <circle cx="3" cy="4" r="4.5" fill="#fff" /><circle cx="-3" cy="4" r="4.5" fill="#fff" />
-              <circle cx="-4.8" cy="-1.5" r="4.5" fill="#fff" /><circle r="3" fill="#F3CF5A" />
-            </g>
-            <!-- base -->
-            <path d="M62 204 L78 152 H242 L258 204 Z" fill="#557F60" stroke="#456C50" stroke-width="1" />
-            <path d="M80 158 H240" stroke="#fff" stroke-opacity="0.15" />
-            <circle cx="110" cy="182" r="7" fill="#2F4A39" /><circle cx="210" cy="182" r="7" fill="#2F4A39" />
-            <rect x="136" y="171" width="9" height="9" rx="1.5" fill="#2F4A39" />
-            <rect x="175" y="171" width="9" height="9" rx="1.5" fill="#2F4A39" />
-            <circle cx="88" cy="194" r="2.5" fill="#2F4A39" /><circle cx="232" cy="194" r="2.5" fill="#2F4A39" />
-            <g transform="translate(14 14)"><circle r="5.2" fill="url(#tornillo)" stroke="#6F6A5E" stroke-width="0.8"/><path d="M-3 -1 L3 1 M-1 3 L1 -3" stroke="#6F6A5E" stroke-width="1.1" stroke-linecap="round"/></g><g transform="translate(306 14)"><circle r="5.2" fill="url(#tornillo)" stroke="#6F6A5E" stroke-width="0.8"/><path d="M-3 -1 L3 1 M-1 3 L1 -3" stroke="#6F6A5E" stroke-width="1.1" stroke-linecap="round"/></g><g transform="translate(14 191)"><circle r="5.2" fill="url(#tornillo)" stroke="#6F6A5E" stroke-width="0.8"/><path d="M-3 -1 L3 1 M-1 3 L1 -3" stroke="#6F6A5E" stroke-width="1.1" stroke-linecap="round"/></g><g transform="translate(306 191)"><circle r="5.2" fill="url(#tornillo)" stroke="#6F6A5E" stroke-width="0.8"/><path d="M-3 -1 L3 1 M-1 3 L1 -3" stroke="#6F6A5E" stroke-width="1.1" stroke-linecap="round"/></g><g transform="translate(160 190)"><circle r="5.2" fill="url(#tornillo)" stroke="#6F6A5E" stroke-width="0.8"/><path d="M-3 -1 L3 1 M-1 3 L1 -3" stroke="#6F6A5E" stroke-width="1.1" stroke-linecap="round"/></g>
+            <rect x="138" y="122" width="364" height="72" rx="6" fill="none" stroke="#000" stroke-width="2" />
+
+            <!-- parte baja de la etiqueta -->
+            <text x="80" y="252" font-family="Helvetica, Arial, sans-serif" font-size="10" letter-spacing="0.6" fill="#3C3936">TYPE I (NORMAL) POSITION</text>
+            <path d="M356 236 H384 V228 L402 242 L384 256 V248 H356 Z" fill="#F26A1B" />
+            <text x="560" y="254" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-weight="700" font-size="34" letter-spacing="-0.5"><tspan fill="#F26A1B">SOFI</tspan><tspan fill="#1C1C1C" font-weight="400">90</tspan></text>
+
+            <!-- base trapezoidal -->
+            <path d="M150 398 L178 292 H462 L490 398 Z" fill="url(#carcasa)" />
+            <path d="M150 398 L178 292 H462 L490 398 Z" fill="url(#rejilla)" />
+            <path d="M150 398 L178 292 H462 L490 398" fill="none" stroke="#4E463F" stroke-width="2.5" />
+            <path d="M184 300 H456" stroke="#FFFFFF" stroke-opacity="0.25" stroke-width="1.5" />
+            <circle cx="320" cy="320" r="9" fill="#1B1B1B" />
+            <circle cx="320" cy="320" r="4" fill="#4A4542" />
+            <rect x="226" y="352" width="22" height="22" rx="3" fill="#1E1B19" />
+            <rect x="392" y="352" width="22" height="22" rx="3" fill="#1E1B19" />
+            <circle cx="290" cy="363" r="10" fill="#1E1B19" />
+            <circle cx="350" cy="363" r="10" fill="#1E1B19" />
+            <rect x="196" y="378" width="16" height="12" rx="2" fill="#2B2623" />
+            <rect x="428" y="378" width="16" height="12" rx="2" fill="#2B2623" />
+            <rect x="306" y="378" width="28" height="10" rx="2" fill="#2B2623" />
+
+            <!-- tornillos -->
+            <g transform="translate(26 26)"><circle r="9" fill="#1B1B1B"/><circle r="9" fill="none" stroke="#6B6560" stroke-width="1.5"/><circle r="5.5" fill="url(#tornilloOsc)"/><path d="M-4 0 H4 M0 -4 V4" stroke="#0E0E0E" stroke-width="1.6" stroke-linecap="round"/></g><g transform="translate(614 26)"><circle r="9" fill="#1B1B1B"/><circle r="9" fill="none" stroke="#6B6560" stroke-width="1.5"/><circle r="5.5" fill="url(#tornilloOsc)"/><path d="M-4 0 H4 M0 -4 V4" stroke="#0E0E0E" stroke-width="1.6" stroke-linecap="round"/></g><g transform="translate(26 374)"><circle r="9" fill="#1B1B1B"/><circle r="9" fill="none" stroke="#6B6560" stroke-width="1.5"/><circle r="5.5" fill="url(#tornilloOsc)"/><path d="M-4 0 H4 M0 -4 V4" stroke="#0E0E0E" stroke-width="1.6" stroke-linecap="round"/></g><g transform="translate(614 374)"><circle r="9" fill="#1B1B1B"/><circle r="9" fill="none" stroke="#6B6560" stroke-width="1.5"/><circle r="5.5" fill="url(#tornilloOsc)"/><path d="M-4 0 H4 M0 -4 V4" stroke="#0E0E0E" stroke-width="1.6" stroke-linecap="round"/></g>
+
+            <!-- brillo del plástico -->
+            <rect x="2" y="2" width="636" height="396" rx="16" fill="url(#brillo)" />
           </svg>
         </div>
         <div class="pistas" id="pistas"></div>
@@ -658,7 +691,7 @@
       <div class="collage" id="collage"></div>
     </section>
 
-    <div id="cortina"><div class="lado izq"><div class="borde"></div></div><div class="lado der"><div class="borde"></div></div></div>
+    <div id="cortina"><div class="lado izq"><canvas></canvas></div><div class="lado der"><canvas></canvas></div></div>
 
     <div id="lightbox" class="hidden"><img id="lightboxImg" alt="" /></div>
 
@@ -684,13 +717,17 @@
         pistas: [
           { titulo: "Honey", artista: "Jesse Baez", url: "https://www.youtube.com/watch?v=F5iI0USuCrI" },
           { titulo: "world is yours.", artista: "Brent Faiyaz", url: "https://www.youtube.com/watch?v=ALRhYNVnDXQ" },
+          { titulo: "Vivo", artista: "Gustavo Cerati", url: "https://www.youtube.com/watch?v=sXR93C_bSVk" },
+          { titulo: "Funny Thing", artista: "Thundercat", url: "https://www.youtube.com/watch?v=XwPB9FrhqjI" },
+          { titulo: "Eso Que Tú Llamas Amor", artista: "pablopablo, Ralphie Choo, Carín León", url: "https://www.youtube.com/watch?v=MhpQrJXybA4" },
         ],
         fotosMixtape: [],
 
         // Scrapbook
         tituloScrapbook: "Unas cuantas fotos para que recuerdes.",
         cancionScrapbook: "https://www.youtube.com/watch?v=F5iI0USuCrI",
-        fotosScrapbook: Array.from({ length: 18 }, (_, i) => "fotos_scrapbook/fotos/s" + (i + 1) + ".jpg"),
+        fotosScrapbook: Array.from({ length: 18 }, (_, i) => "fotos_scrapbook/fotos/s" + (i + 1) + ".jpg")
+          .concat(Array.from({ length: 10 }, (_, i) => "fotos2/s" + (i + 19) + ".jpg")),
       };
       /* ===================================================== */
 
@@ -766,32 +803,206 @@
       });
 
       // ---------- Cortina de flores ----------
-      function flor(x, y, r, petalo, centro) {
-        let g = "";
-        for (let i = 0; i < 5; i++) {
-          const a = (i * 72 - 90) * Math.PI / 180;
-          g += `<circle cx="${(x + Math.cos(a) * r * 0.62).toFixed(1)}" cy="${(y + Math.sin(a) * r * 0.62).toFixed(1)}" r="${(r * 0.5).toFixed(1)}" fill="${petalo}"/>`;
+      // Cortinas pintadas con flores (rosas, peonías y nube) sobre follaje
+      function azar(seed) {
+        return function () {
+          seed = (seed + 0x6d2b79f5) | 0;
+          let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+          t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+          return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+        };
+      }
+      function tono(hex, k) {
+        const n = parseInt(hex.slice(1), 16);
+        let r = n >> 16, g = (n >> 8) & 255, b = n & 255;
+        const m = k > 0 ? 255 : 0, a = Math.abs(k);
+        r = Math.round(r + (m - r) * a); g = Math.round(g + (m - g) * a); b = Math.round(b + (m - b) * a);
+        return `rgb(${r},${g},${b})`;
+      }
+      function hojaC(ctx, x, y, len, ang) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(ang);
+        const g = ctx.createLinearGradient(0, -len * 0.3, 0, len * 0.3);
+        g.addColorStop(0, "#7FA874"); g.addColorStop(0.5, "#557F52"); g.addColorStop(1, "#2F4D30");
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.quadraticCurveTo(len * 0.5, -len * 0.34, len, 0);
+        ctx.quadraticCurveTo(len * 0.5, len * 0.34, 0, 0);
+        ctx.fill();
+        ctx.strokeStyle = "rgba(220,240,210,0.35)";
+        ctx.lineWidth = Math.max(0.8, len * 0.025);
+        ctx.beginPath(); ctx.moveTo(len * 0.05, 0); ctx.lineTo(len * 0.9, 0); ctx.stroke();
+        ctx.restore();
+      }
+      function petalo(ctx, px, py, rx, ry, ang, grad, borde, lw) {
+        ctx.save();
+        ctx.translate(px, py);
+        ctx.rotate(ang);
+        ctx.beginPath();
+        // pétalo con punta suave, no círculo perfecto
+        ctx.moveTo(-rx, 0);
+        ctx.bezierCurveTo(-rx, -ry * 1.05, rx * 0.9, -ry * 1.1, rx, -ry * 0.1);
+        ctx.bezierCurveTo(rx * 1.05, ry * 0.9, -rx * 0.8, ry * 1.1, -rx, 0);
+        ctx.restore();
+        ctx.fillStyle = grad;
+        ctx.fill();
+        ctx.strokeStyle = borde;
+        ctx.lineWidth = lw;
+        ctx.stroke();
+      }
+      function rosa(ctx, x, y, r, color, R) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(R() * Math.PI * 2);
+        const capas = [[1, 6, 0.5], [0.8, 5, 0.44], [0.6, 5, 0.37], [0.42, 4, 0.3], [0.26, 3, 0.22]];
+        capas.forEach(([rad, n, tam], L) => {
+          const g = ctx.createRadialGradient(0, 0, 0, 0, 0, r * rad * 1.15);
+          g.addColorStop(0, tono(color, -0.42));
+          g.addColorStop(0.55, tono(color, -0.08 * L));
+          g.addColorStop(1, tono(color, 0.22 - L * 0.05));
+          ctx.shadowColor = "rgba(50,15,20,0.32)";
+          ctx.shadowBlur = r * (L === 0 ? 0.35 : 0.14);
+          ctx.shadowOffsetY = r * (L === 0 ? 0.1 : 0.04);
+          for (let i = 0; i < n; i++) {
+            const a = (i / n) * Math.PI * 2 + L * 0.7 + R() * 0.3;
+            petalo(ctx, Math.cos(a) * r * rad * 0.42, Math.sin(a) * r * rad * 0.42,
+              r * tam, r * tam * 0.85, a + Math.PI / 2, g, tono(color, -0.25), Math.max(0.6, r * 0.018));
+          }
+        });
+        ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
+        ctx.strokeStyle = tono(color, -0.5);
+        ctx.lineWidth = Math.max(0.8, r * 0.03);
+        ctx.beginPath();
+        for (let t = 0; t < Math.PI * 4; t += 0.2) {
+          const rr = r * 0.02 + t * r * 0.011;
+          ctx.lineTo(Math.cos(t) * rr, Math.sin(t) * rr);
         }
-        return g + `<circle cx="${x}" cy="${y}" r="${(r * 0.3).toFixed(1)}" fill="${centro}"/>`;
+        ctx.stroke();
+        ctx.restore();
       }
-      function hoja(x, y, ang, tam) {
-        return `<ellipse cx="${x}" cy="${y}" rx="${tam}" ry="${tam * 0.42}" fill="#8DB596" transform="rotate(${ang} ${x} ${y})"/>`;
+      function peonia(ctx, x, y, r, color, R) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(R() * Math.PI * 2);
+        for (let L = 0; L < 4; L++) {
+          const rad = 1 - L * 0.22, n = 11 - L * 2;
+          const g = ctx.createRadialGradient(0, 0, 0, 0, 0, r * rad * 1.1);
+          g.addColorStop(0, tono(color, -0.3));
+          g.addColorStop(0.6, color);
+          g.addColorStop(1, tono(color, 0.3));
+          ctx.shadowColor = "rgba(60,30,30,0.28)";
+          ctx.shadowBlur = r * (L === 0 ? 0.3 : 0.1);
+          ctx.shadowOffsetY = r * (L === 0 ? 0.08 : 0.03);
+          for (let i = 0; i < n; i++) {
+            const a = (i / n) * Math.PI * 2 + L * 0.45 + R() * 0.4;
+            const d = r * rad * (0.5 + R() * 0.1);
+            petalo(ctx, Math.cos(a) * d, Math.sin(a) * d, r * 0.32 * rad + r * 0.08, r * 0.26 * rad + r * 0.06,
+              a + Math.PI / 2 + (R() - 0.5) * 0.5, g, tono(color, -0.18), Math.max(0.5, r * 0.014));
+          }
+        }
+        ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
+        for (let i = 0; i < 14; i++) {
+          const a = R() * Math.PI * 2, d = R() * r * 0.14;
+          ctx.fillStyle = i % 3 ? "#E9C25A" : "#B98A2E";
+          ctx.beginPath(); ctx.arc(Math.cos(a) * d, Math.sin(a) * d, r * 0.035, 0, Math.PI * 2); ctx.fill();
+        }
+        ctx.restore();
       }
-      function svgUrl(w, h, cuerpo) {
-        const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">${cuerpo}</svg>`;
-        return 'url("data:image/svg+xml;utf8,' + encodeURIComponent(svg) + '")';
+      function nube(ctx, x, y, s, R) {
+        for (let i = 0; i < 11; i++) {
+          const a = R() * Math.PI * 2, d = R() * s;
+          const px = x + Math.cos(a) * d, py = y + Math.sin(a) * d, rr = s * (0.1 + R() * 0.08);
+          ctx.fillStyle = "rgba(255,255,255,0.95)";
+          ctx.shadowColor = "rgba(0,0,0,0.25)"; ctx.shadowBlur = rr;
+          ctx.beginPath(); ctx.arc(px, py, rr, 0, Math.PI * 2); ctx.fill();
+        }
+        ctx.shadowBlur = 0;
       }
-      const P = { rosa: ["#F2A7B5", "#D9667E"], durazno: ["#F6C2A6", "#E48F6E"], amarillo: ["#F7D774", "#E3A93B"],
-                  lila: ["#C9B6E8", "#9C82CF"], blanco: ["#FFFFFF", "#F3CF5A"], rojo: ["#E86A7E", "#B9435A"] };
-      const patron = svgUrl(150, 150,
-        hoja(40, 48, -30, 13) + hoja(112, 34, 35, 11) + hoja(84, 108, 20, 14) + hoja(20, 128, -50, 10) + hoja(140, 120, 60, 10) +
-        flor(28, 32, 20, ...P.rosa) + flor(104, 22, 16, ...P.blanco) + flor(76, 82, 24, ...P.durazno) +
-        flor(18, 112, 15, ...P.lila) + flor(128, 98, 17, ...P.amarillo) + flor(140, 56, 10, ...P.rojo) + flor(56, 140, 12, ...P.blanco));
-      const borde = svgUrl(76, 120,
-        hoja(20, 50, -40, 16) + hoja(58, 100, 40, 15) +
-        flor(38, 28, 30, ...P.rosa) + flor(36, 88, 28, ...P.durazno));
-      document.querySelectorAll("#cortina .lado").forEach((l) => (l.style.backgroundImage = patron));
-      document.querySelectorAll("#cortina .borde").forEach((b) => (b.style.backgroundImage = borde));
+      const COLORES = [
+        ["#F3C4C8", 30], ["#E59AA8", 20], ["#F5E8D8", 14], ["#FBF6F0", 12],
+        ["#F1B597", 10], ["#C8566E", 9], ["#93303F", 5],
+      ];
+      function colorAzar(R) {
+        let t = R() * 100;
+        for (const [c, w] of COLORES) { if ((t -= w) < 0) return c; }
+        return COLORES[0][0];
+      }
+      function pintarLado(canvas, seed, espejo) {
+        const dpr = Math.min(window.devicePixelRatio || 1, window.innerWidth > 900 ? 1.25 : 2);
+        const cssW = canvas.parentElement.getBoundingClientRect().width || window.innerWidth / 2 + 70;
+        const cssH = window.innerHeight;
+        canvas.width = Math.round(cssW * dpr);
+        canvas.height = Math.round(cssH * dpr);
+        const ctx = canvas.getContext("2d");
+        const R = azar(seed);
+        const W = cssW, H = cssH, base = W - 70; // zona sólida; el resto es el borde con flores sueltas
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        if (espejo) { ctx.translate(W, 0); ctx.scale(-1, 1); }
+        // follaje de fondo
+        const fondo = ctx.createLinearGradient(0, 0, 0, H);
+        fondo.addColorStop(0, "#3E5E40"); fondo.addColorStop(1, "#22382A");
+        ctx.fillStyle = fondo;
+        ctx.fillRect(0, 0, base - 10, H);
+        for (let k = 0; k < (base * H) / 900; k++)
+          hojaC(ctx, R() * (base + 20), R() * H, 16 + R() * 26, R() * Math.PI * 2);
+        // flores
+        const celda = Math.max(52, Math.min(78, W / 4.2));
+        const lista = [];
+        for (let y = -celda * 0.3; y < H + celda * 0.5; y += celda * 0.82)
+          for (let x = celda * 0.2; x < base + 30; x += celda * 0.9)
+            lista.push([x + (R() - 0.5) * celda * 0.5, y + (R() - 0.5) * celda * 0.5, celda * (0.46 + R() * 0.22)]);
+        for (let k = 0; k < 9 + H / 90; k++)
+          lista.push([base - 10 + R() * 52, R() * H, celda * (0.38 + R() * 0.2)]); // flores que sobresalen del borde
+        for (let k = lista.length - 1; k > 0; k--) {
+          const m = Math.floor(R() * (k + 1)); [lista[k], lista[m]] = [lista[m], lista[k]];
+        }
+        lista.forEach(([x, y, r]) => {
+          if (R() < 0.35) hojaC(ctx, x, y, r * 1.5, R() * Math.PI * 2);
+          const c = colorAzar(R);
+          (R() < 0.62 ? rosa : peonia)(ctx, x, y, r, c, R);
+        });
+        for (let k = 0; k < (base * H) / 9000; k++) nube(ctx, R() * base, R() * H, celda * 0.32, R);
+        // luz y sombra suaves
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        const luz = ctx.createLinearGradient(0, 0, 0, canvas.height);
+        luz.addColorStop(0, "rgba(255,240,230,0.10)");
+        luz.addColorStop(1, "rgba(30,10,10,0.22)");
+        ctx.globalCompositeOperation = "source-atop";
+        ctx.fillStyle = luz;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.globalCompositeOperation = "source-over";
+      }
+      let anchoPintado = 0;
+      function pintarCortinas() {
+        if (Math.abs(window.innerWidth - anchoPintado) < 40) return;
+        anchoPintado = window.innerWidth;
+        const [a, b] = document.querySelectorAll("#cortina canvas");
+        pintarLado(a, 7, false);
+        pintarLado(b, 23, true);
+      }
+      setTimeout(pintarCortinas, 60);
+      let tResize;
+      window.addEventListener("resize", () => { clearTimeout(tResize); tResize = setTimeout(pintarCortinas, 300); });
+
+      function lluviaDePetalos() {
+        const cols = ["#F3C4C8", "#E59AA8", "#FBF6F0", "#F1B597", "#C8566E"];
+        for (let i = 0; i < 18; i++) {
+          const p = document.createElement("div");
+          p.className = "petalo";
+          const t = 10 + Math.random() * 10, c = cols[i % cols.length];
+          p.style.width = t + "px";
+          p.style.height = t * 0.8 + "px";
+          p.style.left = Math.random() * 100 + "vw";
+          p.style.background = `radial-gradient(circle at 30% 30%, #fff8, ${c} 55%, ${c})`;
+          p.style.setProperty("--dx", (Math.random() * 120 - 60) + "px");
+          p.style.animationDuration = 1.8 + Math.random() * 1.4 + "s";
+          p.style.animationDelay = Math.random() * 0.6 + "s";
+          document.body.appendChild(p);
+          setTimeout(() => p.remove(), 4200);
+        }
+      }
 
       let enTransicion = false;
       function transition(id) {
@@ -799,13 +1010,14 @@
         enTransicion = true;
         const c = document.getElementById("cortina");
         c.classList.add("cerrada");
+        lluviaDePetalos();
         setTimeout(() => {
           go(id);
           setTimeout(() => {
             c.classList.remove("cerrada");
-            setTimeout(() => (enTransicion = false), 850);
-          }, 350);
-        }, 900);
+            setTimeout(() => (enTransicion = false), 950);
+          }, 380);
+        }, 1000);
       }
 
       // ---------- Escenas ----------
