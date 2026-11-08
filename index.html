@@ -704,6 +704,9 @@
         de: "Pablo",
         tituloCandado: "La Cumpleañera",
         codigo: "0811",
+        // Velas fijas: así el link para ella es solo la dirección de la página.
+        // Para armar otro pastel, abrí la página con ?editar al final.
+        velas: "23.40,25.28,46.24,55.53,55.11,76.2,109.5,132.5,158.5,187.5,207.10,225.30,200.45,140.35,104.46,84.41,80.33,107.33,124.36,148.58,168.41,172.31",
         tituloVideo: "¡Por muchísimos años más celebrándote!",
 
         // Canción de fondo (suena desde que mete el código)
@@ -1145,8 +1148,10 @@
       // Las velas viajan dentro del link: #c=x.y,x.y,...
       function loadCandlesFromLink() {
         const match = location.hash.match(/c=([\d.,]+)/);
-        if (!match) return false;
-        match[1].split(",").forEach((pair) => {
+        let data = match ? match[1] : "";
+        if (!data && CONFIG.velas && !/editar/.test(location.search)) data = CONFIG.velas;
+        if (!data) return false;
+        data.split(",").forEach((pair) => {
           const [x, y] = pair.split(".").map(Number);
           if (!isNaN(x) && !isNaN(y)) addCandle(x, y);
         });
